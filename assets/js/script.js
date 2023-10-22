@@ -133,7 +133,22 @@ for (let i = 0; i < formInputs.length; i++) {
 
   });
 }
+// add event to form submit button
+formBtn.addEventListener("click", function (event) {
+  event.preventDefault(); // prevent default form submission behavior
 
+  // get form data
+  const formData = new FormData(form);
+
+  // create email message
+  const message = "Name: " + formData.get("fullname") + "\n" +
+                  "Email: " + formData.get("email") + "\n" +
+                  "Message: " + formData.get("message");
+// Add debug message
+console.log(message);
+  // send email
+  window.location.href = "mailto:mujain@ucsd.edu?subject=Contact Form Submission&body=" + encodeURIComponent(message);
+});
 
 
 // page navigation variables
