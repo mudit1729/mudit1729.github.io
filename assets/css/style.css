@@ -822,6 +822,17 @@ main {
   box-shadow: 0 0 0 4px var(--jet);
 }
 
+.clients-item img {
+  width: 200px;
+  height: 200px;
+}
+
+.clients-item img[src="./assets/images/logo-3-color.png"] {
+  width: 250px;
+  height: 250px;
+  margin-bottom: -10px;
+}
+
 .timeline-text {
   color: var(--light-gray);
   font-weight: var(--fw-300);
