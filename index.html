@@ -458,48 +458,46 @@
         <section class="clients">
 
           <h3 class="h3 clients-title">Previous Employers</h3>
-
+        
           <ul class="clients-list has-scrollbar">
-
+        
             <li class="clients-item">
               <a href="#">
                 <img src="./assets/images/logo-1-color.png" alt="UCSD">
               </a>
             </li>
-
+        
             <li class="clients-item">
               <a href="#">
                 <img src="./assets/images/logo-2-color.png" alt="NVIDIA">
               </a>
             </li>
-
+        
             <li class="clients-item">
               <a href="#">
                 <img src="./assets/images/logo-3-color.png" alt="client logo">
               </a>
             </li>
-
-            <!-- <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-4-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-5-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-6-color.png" alt="client logo">
-              </a>
-            </li> -->
-
+        
           </ul>
-
+        
         </section>
+        
+        <style>
+          /* responsive styles */
+          @media (max-width: 767px) {
+            .clients-list {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .clients-item {
+              width: 50%;
+              max-width: 200px;
+              margin-bottom: 20px;
+            }
+          }
+        </style>
 
       </article>
 
