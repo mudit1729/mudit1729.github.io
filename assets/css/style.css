@@ -828,6 +828,13 @@ main {
   line-height: 1.6;
 }
 
+.timeline-text ul {
+  color: #555;
+}
+
+.timeline-text a {
+  color: green;
+}
 
 /**
  * skills 
