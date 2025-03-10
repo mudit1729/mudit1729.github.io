@@ -3,12 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mudit Jain - Technology specialist with expertise in 3D Machine Learning, SLAM, Computer Vision, GPU programming, and Embedded Systems">
   <title>Mudit Jain</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" as="style">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
+  </noscript>
+  <style>
+    /* Critical CSS for above-the-fold content */
+    body {font-family:'Inter',sans-serif;background:#fff;color:#333;line-height:1.6;}
+    .container {display:flex;min-height:100vh;}
+    .sidebar {width:300px;padding:2rem;position:fixed;top:0;left:0;bottom:0;background:#fff;border-right:1px solid #f0f0f0;display:flex;flex-direction:column;}
+    .profile-section {display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:1rem;flex:0 0 auto;}
+    .profile-img {width:120px;height:120px;border-radius:50%;object-fit:cover;}
+    .header-title {text-align:center;margin-bottom:1rem;}
+    .sidebar h1 {font-weight:500;letter-spacing:-0.5px;font-size:1.5rem;margin-bottom:0.5rem;}
+    .social-icons {display:flex;gap:0.8rem;justify-content:center;margin-bottom:1rem;}
+    .social-icons a {color:#555;font-size:1.1rem;transition:color 0.3s ease;}
+    .nav-container {flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;margin:2rem 0;}
+    .nav-links {list-style:none;}
+    .nav-links li {margin-bottom:0.8rem;}
+    .nav-links a {display:block;padding:0.5rem;text-decoration:none;color:#555;font-size:0.95rem;transition:all 0.3s ease;border-left:2px solid transparent;}
+    .main-content {margin-left:300px;padding:2rem;width:calc(100% - 300px);transition:margin-left 0.5s ease,width 0.5s ease;}
+  </style>
   <style>
     /* Basic Reset */
     * {
@@ -392,7 +419,7 @@
       </div>
       
       <div class="profile-section">
-        <img src="profile.jpeg" alt="Profile Picture" class="profile-img">
+        <img src="profile.jpeg" alt="Profile Picture" class="profile-img" width="120" height="120" loading="lazy" fetchpriority="high">
       </div>
       
       <div class="nav-container">
@@ -767,56 +794,58 @@
     <i class="fas fa-bars"></i>
   </div>
 
-  <script>
+  <script defer>
     // Get all sections and navigation links
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    // Function to show only the active section
-    function showActiveSection(sectionId) {
-      // Hide all sections
-      document.querySelectorAll('.section-content').forEach(section => {
-        section.style.display = 'none';
-      });
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-links a');
       
-      // Show only the selected section
-      const activeSection = document.querySelector(sectionId);
-      if (activeSection) {
-        activeSection.style.display = 'block';
+      // Function to show only the active section
+      function showActiveSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.section-content').forEach(section => {
+          section.style.display = 'none';
+        });
+        
+        // Show only the selected section
+        const activeSection = document.querySelector(sectionId);
+        if (activeSection) {
+          activeSection.style.display = 'block';
+        }
+        
+        // Update active class on navigation links
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === sectionId) {
+            link.classList.add('active');
+          }
+        });
       }
       
-      // Update active class on navigation links
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === sectionId) {
-          link.classList.add('active');
-        }
-      });
-    }
-    
-    // Show the work history section by default when page loads
-    document.addEventListener('DOMContentLoaded', function() {
+      // Show the work history section by default when page loads
       showActiveSection('#work');
-    });
-    
-    // Smooth scrolling and section switching for nav links
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        showActiveSection(targetId);
-        
-        // Close menu on mobile after clicking
-        if (window.innerWidth <= 768) {
-          document.body.classList.remove('menu-open');
-        }
+      
+      // Smooth scrolling and section switching for nav links
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          showActiveSection(targetId);
+          
+          // Close menu on mobile after clicking
+          if (window.innerWidth <= 768) {
+            document.body.classList.remove('menu-open');
+          }
+        });
       });
-    });
-
-    // Toggle mobile menu
-    const menuToggle = document.getElementById('menuToggle');
-    menuToggle.addEventListener('click', function() {
-      document.body.classList.toggle('menu-open');
+  
+      // Toggle mobile menu
+      const menuToggle = document.getElementById('menuToggle');
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+          document.body.classList.toggle('menu-open');
+        });
+      }
     });
   </script>
 </body>
