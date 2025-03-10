@@ -190,6 +190,9 @@
       margin-right: 0.5rem;
       font-size: 1rem;
     }
+    .company::selection {
+      background: #f0f0f0;
+    }
     .duration {
       font-weight: 300;
       color: #777;
@@ -263,6 +266,26 @@
       color: #888;
       margin-top: 0.3rem;
       font-style: italic;
+    }
+    .location {
+      font-size: 0.85rem;
+      color: #888;
+      font-style: italic;
+      margin-top: 0.4rem;
+    }
+    .location i {
+      margin-right: 0.3rem;
+      color: #999;
+    }
+    .company a {
+      color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #eaeaea;
+      transition: all 0.3s ease;
+    }
+    .company a:hover {
+      color: #000;
+      border-bottom: 1px solid #999;
     }
     .award-item {
       margin-bottom: 1.5rem;
@@ -353,115 +376,178 @@
           <a href="https://www.linkedin.com/in/muditj1729/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
           <a href="https://x.com/Mudit1729" target="_blank" title="X (Twitter)"><i class="fab fa-twitter"></i></a>
           <a href="mailto:muditj1801@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="Resume.pdf" download title="Download CV"><i class="fas fa-file-download"></i></a>
         </div>
       </div>
       
       <div class="profile-section">
         <img src="profile.jpeg" alt="Profile Picture" class="profile-img">
-        <div class="intro">
-          <p>Hi, I'm Mudit Jain. I excel in integrated engineering solutions through comprehensive, cross-disciplinary thinking.</p>
-        </div>
-        <a href="Resume.pdf" download class="download-cv">Download CV</a>
       </div>
       
       <ul class="nav-links">
-        <li><a href="#news">News & Updates</a></li>
-        <li><a href="#work">Work History</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#awards">Honors & Awards</a></li>
-        <li><a href="#blogs">Blogs</a></li>
+        <li><a href="#work" class="nav-link" data-section="work">Work History</a></li>
+        <li><a href="#about-news" class="nav-link" data-section="about-news">About & News</a></li>
+        <li><a href="#education-skills" class="nav-link" data-section="education-skills">Education & Skills</a></li>
+        <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+        <li><a href="#awards" class="nav-link" data-section="awards">Honors & Awards</a></li>
+        <li><a href="#blogs" class="nav-link" data-section="blogs">Blogs</a></li>
       </ul>
     </aside>
     
     <div class="main-content">
-      <section id="news" class="news-updates">
+      <section id="about-news" class="about-news section-content">
+        <h2>About Me</h2>
+        <p>Hi, I'm Mudit Jain, an engineer at heart with expertise in 3D/2D Machine Learning, SLAM, Computer Vision, GPU programming, and Embedded Systems.</p>
+        <p>Currently, my work is centered on using Multimodal AI, particularly fusing LiDAR and camera data for 2D/3D static/dynamic object detection/tracking. My interests include applied ML and CV research, real-time SLAM systems, and advancing computer vision capabilities for autonomous vehicles.</p>
+        
         <h2>News & Updates</h2>
         <div class="news">
+          <p><strong>2025:</strong> Serving as a reviewer for IEEE IV 2025.</p>
           <p><strong>2024:</strong> Joined Qualcomm as Senior Deep Learning Engineer in Multimodal AI.</p>
           <p><strong>2024:</strong> Mentored a project at Google Summer of Code on 3D Reconstruction.</p>
+          <p><strong>2024:</strong> Serving as a reviewer for WACV 2025.</p>
+          <p><strong>2024:</strong> Published a patent.</p>
+          <p><strong>2021:</strong> Joined Qualcomm as Senior Machine Learning Engineer, XR Research.</p>
+          <p><strong>2021:</strong> Graduated with Master's degree from University of California San Diego.</p>
+          <p><strong>2019:</strong> Started Master's in Electrical and Computer Engineering at UCSD.</p>
+          <p><strong>2019:</strong> Joined DroneLab at UCSD as Graduate Student Researcher.</p>
+          <p><strong>2017:</strong> Promoted to Embedded System Software Engineer II at NVIDIA.</p>
+          <p><strong>2016:</strong> Joined NVIDIA as Embedded System Software Engineer I.</p>
+          <p><strong>2016:</strong> Graduated with Bachelor's degree from BITS Pilani.</p>
+          <p><strong>2016:</strong> Selected for Google Summer of Code as Developer for RTEMS.</p>
+          <p><strong>2015:</strong> Joined NVIDIA as an Intern.</p>
+          <p><strong>2014:</strong> Joined Srujana Innovation Center as an Intern.</p>
+          <p><strong>2012:</strong> Started Bachelor's in Electronics and Communication at BITS Pilani.</p>
         </div>
       </section>
 
-      <section id="work" class="work-history">
+      <section id="work" class="work-history section-content">
         <h2>Work History</h2>
         <ul class="experience-list">
           <li>
             <div class="experience-item">
               <div class="experience-header">
                 <span class="position">Senior Deep Learning Engineer - Multimodal AI</span>
-                <span class="company">Qualcomm</span>
-                <span class="duration">2024 - Present</span>
+                <span class="company"><a href="https://www.qualcomm.com" target="_blank">Qualcomm</a></span>
+                <span class="duration">Jun 2024 - Present</span>
               </div>
-              <p class="description">Working on cutting-edge multimodal AI systems.</p>
+              <p class="description">Developing Multimodal AI (LiDAR + Camera) for static and dynamic object detection and tracking. Building Vision Foundation model-based networks for various autonomous tasks.</p>
+              <p class="description">Manager: <a href="https://scholar.google.com/citations?user=z0a8rsYAAAAJ&hl=en&oi=sra" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Dr. Senthil Yogamani</a>, <a href="https://scholar.google.com/citations?user=Tll071oAAAAJ&hl=en&oi=sra" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Dr. Varun Ravi Kumar</a></p>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
             </div>
           </li>
           <li>
             <div class="experience-item">
               <div class="experience-header">
                 <span class="position">Developer & Mentor - 3D Reconstruction</span>
-                <span class="company">Google Summer of Code</span>
-                <span class="duration">2024 - Present</span>
+                <span class="company"><a href="https://summerofcode.withgoogle.com/" target="_blank">Google Summer of Code</a></span>
+                <span class="duration">May 2024 - Sep 2024</span>
               </div>
-              <p class="description">Mentoring projects focused on 3D reconstruction technology.</p>
+              <p class="description">Mentoring project on converting unconstrained video to Gaussian Splats with OpenCV organization. Working with Gary Bradski, Founder & President of OpenCV foundation.</p>
+              <p class="description">Manager: <a href="https://en.wikipedia.org/wiki/Gary_Bradski" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Gary Bradski</a></p>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
             </div>
           </li>
           <li>
             <div class="experience-item">
               <div class="experience-header">
                 <span class="position">Senior Machine Learning Engineer</span>
-                <span class="company">Qualcomm</span>
-                <span class="duration">2021 - 2024</span>
+                <span class="company"><a href="https://www.qualcomm.com" target="_blank" >Qualcomm</a></span>
+                <span class="duration">Aug 2021 - Jun 2024</span>
               </div>
-              <p class="description">Developed multimodal AI systems and 3D reconstruction models.</p>
+              <p class="description">Led the development of optimized visual odometry solutions for AR/VR/MR use cases. XR Research - Computer Vision team focusing on spatial computing technologies.</p>
+              <p class="description">Manager: <a href="https://scholar.google.com/citations?user=A93BbMAAAAAJ&hl=en&oi=ao" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Vasudev Bhaskaran</a></p>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
             </div>
           </li>
           <li>
             <div class="experience-item">
               <div class="experience-header">
-                <span class="position">Graduate Student Researcher [Funded]</span>
-                <span class="company">Drone Lab - UCSD</span>
-                <span class="duration">2019 - 2021</span>
+                <span class="position">Graduate Student Researcher</span>
+                <span class="company"><a href="https://dronelab.ucsd.edu/" target="_blank" >DroneLab, University of California San Diego</a></span>
+                <span class="duration">Sep 2019 - May 2021</span>
               </div>
-              <p class="description">Conducted research in computer vision and drone systems.</p>
+              <p class="description">Designed and deployed an Attention-based CNN on 600 cameras for wildfire detection (ALERTWildFire initiative). Developed 4K video processing pipeline on NVIDIA AGX Xavier using DeepStream SDK and TensorRT.</p>
+              <p class="description">Manager: Dr. Falko Kuester</p>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
             </div>
           </li>
           <li>
             <div class="experience-item">
               <div class="experience-header">
-                <span class="position">Embedded System Software Engineer</span>
-                <span class="company">NVIDIA</span>
-                <span class="duration">2016 - 2019</span>
+                <span class="position">Graduate Teaching Assistant</span>
+                <span class="company"><a href="https://ucsd.edu" target="_blank" >University of California San Diego</a></span>
+                <span class="duration">Jan 2020 - Mar 2020</span>
               </div>
-              <p class="description">Worked on embedded systems software development.</p>
+              <p class="description">Taught Art of Product Engineering (ECE 140A) covering end-to-end software development and hardware integration.</p>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
+            </div>
+          </li>
+          <li>
+            <div class="experience-item">
+              <div class="experience-header">
+                <span class="position">Embedded System Software Engineer II</span>
+                <span class="company"><a href="https://www.nvidia.com" target="_blank" >NVIDIA</a></span>
+                <span class="duration">Oct 2017 - Jul 2019</span>
+              </div>
+              <p class="description">Designed I2C Virtualization per ISO26262 functional safety standards for ARM-based SoCs (Xavier/Parker). Optimized bootloader and implemented OS-agnostic GPCDMA library for automotive applications.</p>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> Bengaluru, India</p>
+            </div>
+          </li>
+          <li>
+            <div class="experience-item">
+              <div class="experience-header">
+                <span class="position">Embedded System Software Engineer I</span>
+                <span class="company"><a href="https://www.nvidia.com" target="_blank" >NVIDIA</a></span>
+                <span class="duration">Jul 2016 - Oct 2017</span>
+              </div>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> Bengaluru, India</p>
+            </div>
+          </li>
+          <li>
+            <div class="experience-item">
+              <div class="experience-header">
+                <span class="position">Developer</span>
+                <span class="company"><a href="https://summerofcode.withgoogle.com/" target="_blank" >Google Summer of Code</a></span>
+                <span class="duration">Apr 2016 - Jul 2016</span>
+              </div>
+              <p class="description">Ported FreeBSD SDMMC driver for RTEMS and added DMA library for Raspberry Pi BSP.</p>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> Bengaluru, India · Remote</p>
+            </div>
+          </li>
+          <li>
+            <div class="experience-item">
+              <div class="experience-header">
+                <span class="position">Intern</span>
+                <span class="company"><a href="https://www.nvidia.com" target="_blank" >NVIDIA</a></span>
+                <span class="duration">Jul 2015 - Dec 2015</span>
+              </div>
+              <p class="description">Developed production tools for automotive customers to create OS firmware and boot targets.</p>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> Bengaluru, India</p>
+            </div>
+          </li>
+          <li>
+            <div class="experience-item">
+              <div class="experience-header">
+                <span class="position">Intern</span>
+                <span class="company"><a href="https://lvpmitra.com/" target="_blank" >Srujana Innovation Center</a></span>
+                <span class="duration">Dec 2014 - Apr 2015</span>
+              </div>
+              <p class="description">Developed a low-cost wearable VR headset and Pupil+ platform for eye diagnosis (MIT Media Labs collaboration).</p>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> Hyderabad, India</p>
             </div>
           </li>
         </ul>
       </section>
 
-      <section id="skills" class="skills">
-        <h2>Skills</h2>
-        <div class="skills-container">
-          <span class="skill-tag">Deep Learning</span>
-          <span class="skill-tag">Machine Learning</span>
-          <span class="skill-tag">Computer Vision</span>
-          <span class="skill-tag">3D Reconstruction</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">C++</span>
-          <span class="skill-tag">Multimodal AI</span>
-          <span class="skill-tag">Embedded Systems</span>
-        </div>
-      </section>
-
-      <section id="education" class="education">
+      <section id="education-skills" class="education-skills section-content">
         <h2>Education</h2>
         <ul class="experience-list">
           <li>
             <div class="experience-item">
               <div class="experience-header">
                 <span class="position">Master's degree in Electrical and Computer Engineering</span>
-                <span class="company">University of California San Diego (UCSD)</span>
+                <span class="company"><a href="https://ucsd.edu" target="_blank">University of California San Diego (UCSD)</a></span>
                 <span class="duration">2019-2021</span>
               </div>
               <p class="description">Specialization in Machine Learning and Data Science</p>
@@ -472,30 +558,116 @@
             <div class="experience-item">
               <div class="experience-header">
                 <span class="position">Bachelor of Engineering (B.E.) in Electronics and Communication</span>
-                <span class="company">Birla Institute of Technology and Science, Pilani</span>
+                <span class="company"><a href="https://www.bits-pilani.ac.in" target="_blank">Birla Institute of Technology and Science, Pilani</a></span>
                 <span class="duration">2012-2016</span>
               </div>
               <p class="description">Minor in Data Science with focus on Embedded Systems and Computer Vision</p>
             </div>
           </li>
         </ul>
+        
+        <h2>Skills</h2>
+        
+        <h3>Programming Languages</h3>
+        <div class="skills-container">
+          <span class="skill-tag">C++ <span class="tech-stack">[6+ years]</span></span>
+          <span class="skill-tag">Python <span class="tech-stack">[6+ years]</span></span>
+        </div>
+        
+        <h3>Technical Knowledge Domains</h3>
+        <div class="skills-container">
+          <span class="skill-tag">Multimodal Large Scale Deep Learning <span class="tech-stack">[Ray, Kubernetes, PyTorch]</span></span>
+          <span class="skill-tag">Classical Computer Vision <span class="tech-stack">[C++, OpenCV]</span></span>
+          <span class="skill-tag">3D Computer Vision</span>
+          <span class="skill-tag">Machine Learning <span class="tech-stack">[PyTorch, JAX]</span></span>
+          <span class="skill-tag">SLAM <span class="tech-stack">[ORB-SLAM, VINS Mono]</span></span>
+          <span class="skill-tag">Non-linear Optimization <span class="tech-stack">[Eigen, g2o, ceres, GTSAM]</span></span>
+          <span class="skill-tag">Bundle Adjustment</span>
+          <span class="skill-tag">Camera Calibration</span>
+          <span class="skill-tag">Pose Graph Optimization</span>
+          <span class="skill-tag">IMU Preintegration</span>
+          <span class="skill-tag">Bayesian Inference</span>
+          <span class="skill-tag">Embedded Systems</span>
+          <span class="skill-tag">SIMD Programming <span class="tech-stack">[CUDA]</span></span>
+          <span class="skill-tag">Model Optimization <span class="tech-stack">[TensorRT]</span></span>
+          <span class="skill-tag">3D Reconstruction <span class="tech-stack">[NeRFs, Gaussian Splatting]</span></span>
+          <span class="skill-tag">2D/3D Object Detection</span>
+        </div>
+        
+        <style>
+          @media (max-width: 768px) {
+            .programming-skills-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+          .tech-stack {
+            font-size: 0.8em;
+            opacity: 0.7;
+            font-style: italic;
+          }
+          h3 {
+            font-size: 1.1rem;
+            margin: 15px 0 10px 0;
+            color: #444;
+            position: relative;
+          }
+          .github-icon {
+            margin-left: 6px;
+            font-size: 1rem;
+            color: #777;
+            transition: color 0.3s ease;
+            vertical-align: middle;
+          }
+          a:hover .github-icon {
+            color: #000;
+          }
+          .blog-icon {
+            margin-left: 6px;
+            font-size: 0.9rem;
+            color: #777;
+            transition: color 0.3s ease;
+            vertical-align: middle;
+          }
+          a:hover .blog-icon {
+            color: #000;
+          }
+          .blog-item h3 a {
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #eaeaea;
+            transition: all 0.3s ease;
+          }
+          .blog-item h3 a:hover {
+            color: #000;
+            border-bottom: 1px solid #999;
+          }
+          .blog-item {
+            margin-bottom: 1.8rem;
+          }
+        </style>
       </section>
 
-      <section id="projects" class="projects">
+      <section id="projects" class="projects section-content">
         <h2>Projects</h2>
         
         <div class="project-item">
-          <h3><a href="https://github.com/mudit1729/dinov2-od" target="_blank">DINOv2 Object Detection</a></h3>
+          <h3>
+            <a href="https://github.com/mudit1729/dinov2-od" target="_blank">DINOv2 Object Detection <i class="fab fa-github github-icon"></i></a>
+          </h3>
           <p>Implementation of object detection using DINOv2 self-supervised vision transformers, enabling state-of-the-art zero-shot detection capabilities.</p>
         </div>
         
         <div class="project-item">
-          <h3><a href="https://github.com/mudit1729/ba_in_the_large" target="_blank">Bundle Adjustment in the Large</a></h3>
+          <h3>
+            <a href="https://github.com/mudit1729/ba_in_the_large" target="_blank">Bundle Adjustment in the Large <i class="fab fa-github github-icon"></i></a>
+          </h3>
           <p>Optimization methods for large-scale bundle adjustment in 3D reconstruction challenges, focusing on efficiency and scalability.</p>
         </div>
         
         <div class="project-item">
-          <h3><a href="https://github.com/mudit1729/depth_estimation" target="_blank">Depth Estimation</a></h3>
+          <h3>
+            <a href="https://github.com/mudit1729/depth_estimation" target="_blank">Depth Estimation <i class="fab fa-github github-icon"></i></a>
+          </h3>
           <p>Monocular depth estimation techniques for 3D scene understanding from 2D images using deep learning approaches.</p>
         </div>
 
@@ -536,7 +708,7 @@
         </div>
       </section>
 
-      <section id="awards" class="awards">
+      <section id="awards" class="awards section-content">
         <h2>Honors & Awards</h2>
         
         <div class="award-item">
@@ -558,9 +730,22 @@
         </div>
       </section>
 
-      <section id="blogs" class="blogs">
+      <section id="blogs" class="blogs section-content">
         <h2>Blogs</h2>
-        <p>Stay tuned for my latest blog posts.</p>
+        
+        <div class="blog-item">
+          <h3>
+            <a href="https://bitter-coast-9f6.notion.site/Bird-s-Eye-View-Perception-5a8032a4f84b4429b64122905972cd49?pvs=4" target="_blank">Bird's-Eye View Perception <i class="fas fa-external-link-alt blog-icon"></i></a>
+          </h3>
+          <p>Comprehensive overview of Bird's-Eye View (BEV) perception techniques for autonomous driving, covering image-based, LiDAR-based, and multi-modal approaches.</p>
+        </div>
+        
+        <div class="blog-item">
+          <h3>
+            <a href="https://bitter-coast-9f6.notion.site/Coding-C-6240b2e830ce45f4bb63422166db4c06?pvs=4" target="_blank">Learning C++ <i class="fas fa-external-link-alt blog-icon"></i></a>
+          </h3>
+          <p>Guide to mastering C++ programming language from fundamentals to advanced concepts, with practical examples and best practices for efficient code development.</p>
+        </div>
       </section>
     </div>
   </div>
@@ -570,17 +755,43 @@
   </div>
 
   <script>
-    // Active navigation highlighting
+    // Get all sections and navigation links
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
     
-    // Smooth scrolling for nav links
+    // Function to show only the active section
+    function showActiveSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section-content').forEach(section => {
+        section.style.display = 'none';
+      });
+      
+      // Show only the selected section
+      const activeSection = document.querySelector(sectionId);
+      if (activeSection) {
+        activeSection.style.display = 'block';
+      }
+      
+      // Update active class on navigation links
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === sectionId) {
+          link.classList.add('active');
+        }
+      });
+    }
+    
+    // Show the work history section by default when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      showActiveSection('#work');
+    });
+    
+    // Smooth scrolling and section switching for nav links
     navLinks.forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        targetSection.scrollIntoView({ behavior: 'smooth' });
+        showActiveSection(targetId);
         
         // Close menu on mobile after clicking
         if (window.innerWidth <= 768) {
@@ -593,26 +804,6 @@
     const menuToggle = document.getElementById('menuToggle');
     menuToggle.addEventListener('click', function() {
       document.body.classList.toggle('menu-open');
-    });
-
-    // Highlight active section on scroll
-    window.addEventListener('scroll', function() {
-      let current = '';
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.offsetHeight;
-        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-          current = '#' + section.getAttribute('id');
-        }
-      });
-      
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === current) {
-          link.classList.add('active');
-        }
-      });
     });
   </script>
 </body>
