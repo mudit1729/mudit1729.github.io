@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mudit Jain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #333;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    header {
+      padding: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header h1 {
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+    }
+    nav {
+      margin-top: 1.5rem;
+    }
+    nav a {
+      color: #555;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 400;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #000;
+    }
+    .profile-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-bottom: 3rem;
+    }
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      filter: grayscale(20%);
+      transition: filter 0.3s ease;
+    }
+    .profile-img:hover {
+      filter: grayscale(0%);
+    }
+    .intro {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      color: #444;
+      font-weight: 300;
+      font-size: 1.1rem;
+    }
+    .download-cv {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: #f5f5f5;
+      color: #333;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s ease;
+    }
+    .download-cv:hover {
+      background: #e9e9e9;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    section h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      letter-spacing: -0.3px;
+      color: #111;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    section h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      width: 3rem;
+      background: #333;
+    }
+    .news p {
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+    p {
+      color: #555;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+    .experience-list {
+      list-style: none;
+    }
+    .experience-item {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .experience-header {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+      align-items: baseline;
+    }
+    .position {
+      font-weight: 500;
+      color: #333;
+      margin-right: 0.5rem;
+      font-size: 1rem;
+    }
+    .company {
+      font-weight: 400;
+      color: #555;
+      margin-right: 0.5rem;
+      font-size: 1rem;
+    }
+    .duration {
+      font-weight: 300;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    .description {
+      color: #666;
+      font-size: 0.9rem;
+      padding-left: 0.5rem;
+      border-left: 2px solid #eee;
+    }
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skill-tag {
+      background: #f5f5f5;
+      padding: 0.4rem 0.8rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      color: #444;
+      transition: all 0.3s ease;
+    }
+    .skill-tag:hover {
+      background: #eaeaea;
+    }
+    .education-item {
+      margin-bottom: 1rem;
+    }
+    .education-item h3 {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 0.3rem;
+    }
+    .education-details {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.3rem;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1.5rem;
+      }
+      .profile-img {
+        width: 120px;
+        height: 120px;
+      }
+      .experience-header {
+        flex-direction: column;
+      }
+      .position, .company, .duration {
+        margin-bottom: 0.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mudit Jain</h1>
+    <nav>
+      <a href="https://www.linkedin.com/in/muditj1729/" target="_blank">LinkedIn</a>
+      <a href="https://mudit1729.github.io/" target="_blank">Portfolio</a>
+      <a href="mailto:mudit@example.com">Email</a>
+    </nav>
+  </header>
+  
+  <div class="profile-section">
+    <img src="profile.jpeg" alt="Profile Picture" class="profile-img">
+    <div class="intro">
+      <p>Hi, I'm Mudit Jain. I excel in integrated engineering solutions through comprehensive, cross-disciplinary thinking.</p>
+    </div>
+    <a href="Resume.pdf" download class="download-cv">Download CV</a>
+  </div>
+  
+  <section class="news-updates">
+    <h2>News & Updates</h2>
+    <div class="news">
+      <p><strong>2024:</strong> Joined Qualcomm as Senior Deep Learning Engineer in Multimodal AI.</p>
+      <p><strong>2024:</strong> Mentored a project at Google Summer of Code on 3D Reconstruction.</p>
+    </div>
+  </section>
+
+  <section class="work-history">
+    <h2>Work</h2>
+    <ul class="experience-list">
+      <li>
+        <div class="experience-item">
+          <div class="experience-header">
+            <span class="position">Senior Deep Learning Engineer - Multimodal AI</span>
+            <span class="company">Qualcomm</span>
+            <span class="duration">2024 - Present</span>
+          </div>
+          <p class="description">Working on cutting-edge multimodal AI systems.</p>
+        </div>
+      </li>
+      <li>
+        <div class="experience-item">
+          <div class="experience-header">
+            <span class="position">Developer & Mentor - 3D Reconstruction</span>
+            <span class="company">Google Summer of Code</span>
+            <span class="duration">2024 - Present</span>
+          </div>
+          <p class="description">Mentoring projects focused on 3D reconstruction technology.</p>
+        </div>
+      </li>
+      <li>
+        <div class="experience-item">
+          <div class="experience-header">
+            <span class="position">Senior Machine Learning Engineer</span>
+            <span class="company">Qualcomm</span>
+            <span class="duration">2021 - 2024</span>
+          </div>
+          <p class="description">Developed multimodal AI systems and 3D reconstruction models.</p>
+        </div>
+      </li>
+      <li>
+        <div class="experience-item">
+          <div class="experience-header">
+            <span class="position">Graduate Student Researcher [Funded]</span>
+            <span class="company">Drone Lab - UCSD</span>
+            <span class="duration">2019 - 2021</span>
+          </div>
+          <p class="description">Conducted research in computer vision and drone systems.</p>
+        </div>
+      </li>
+      <li>
+        <div class="experience-item">
+          <div class="experience-header">
+            <span class="position">Embedded System Software Engineer</span>
+            <span class="company">NVIDIA</span>
+            <span class="duration">2016 - 2019</span>
+          </div>
+          <p class="description">Worked on embedded systems software development.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="skills">
+    <h2>Skills</h2>
+    <div class="skills-container">
+      <span class="skill-tag">Deep Learning</span>
+      <span class="skill-tag">Machine Learning</span>
+      <span class="skill-tag">Computer Vision</span>
+      <span class="skill-tag">3D Reconstruction</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">C++</span>
+      <span class="skill-tag">Multimodal AI</span>
+      <span class="skill-tag">Embedded Systems</span>
+    </div>
+  </section>
+
+  <section class="education">
+    <h2>Education</h2>
+    <div class="education-item">
+      <h3>University of California San Diego (UCSD)</h3>
+      <p class="education-details">Graduate Student Researcher [Funded] • 2019-2021</p>
+      <p class="education-details">Drone Lab at UCSD</p>
+    </div>
+  </section>
+
+  <section class="projects">
+    <h2>Projects</h2>
+    <p>Currently working on projects related to multimodal AI systems, 3D reconstruction, computer vision applications, and machine learning implementations.</p>
+  </section>
+
+  <section class="blogs">
+    <h2>Blogs</h2>
+    <p>Stay tuned for my latest blog posts.</p>
+  </section>
+</body>
+</html>
