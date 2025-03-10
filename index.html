@@ -65,7 +65,7 @@
       bottom: 0;
       background: #fff;
       border-right: 1px solid #f0f0f0;
-      overflow-y: auto;
+      overflow-y: hidden; /* Hide scrollbar */
       transition: transform 0.5s ease;
       display: flex;
       flex-direction: column;
@@ -75,7 +75,24 @@
       padding: 2rem;
       width: calc(100% - 300px);
       transition: margin-left 0.5s ease, width 0.5s ease;
+      position: relative; /* For custom scrollbar positioning */
     }
+    
+    /* Hide default scrollbar for all browsers */
+    .main-content::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* For Firefox */
+    .main-content {
+      scrollbar-width: none;
+    }
+    
+    /* For IE and Edge */
+    .main-content {
+      -ms-overflow-style: none;
+    }
+    
     .header-title {
       text-align: center;
       margin-bottom: 1rem;
@@ -433,6 +450,7 @@
       </ul>
       </div>
     </aside>
+    
     
     <div class="main-content">
       <section id="about-news" class="about-news section-content">
