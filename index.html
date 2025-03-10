@@ -40,6 +40,8 @@
       border-right: 1px solid #f0f0f0;
       overflow-y: auto;
       transition: transform 0.5s ease;
+      display: flex;
+      flex-direction: column;
     }
     .main-content {
       margin-left: 300px;
@@ -77,6 +79,14 @@
       justify-content: center;
       flex-direction: column;
       margin-bottom: 1rem;
+      flex: 0 0 auto;
+    }
+    .nav-container {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 2rem 0;
     }
     .profile-img {
       width: 120px;
@@ -385,7 +395,8 @@
         <img src="profile.jpeg" alt="Profile Picture" class="profile-img">
       </div>
       
-      <ul class="nav-links">
+      <div class="nav-container">
+        <ul class="nav-links">
         <li><a href="#work" class="nav-link" data-section="work">💼 Work History</a></li>
         <li><a href="#about-news" class="nav-link" data-section="about-news">👨‍💻 About & News</a></li>
         <li><a href="#education-skills" class="nav-link" data-section="education-skills">🎓 Education & Skills</a></li>
@@ -393,6 +404,7 @@
         <li><a href="#awards" class="nav-link" data-section="awards">🏆 Honors & Awards</a></li>
         <li><a href="#blogs" class="nav-link" data-section="blogs">📝 Blogs</a></li>
       </ul>
+      </div>
     </aside>
     
     <div class="main-content">
@@ -433,7 +445,7 @@
                 <span class="duration">Jun 2024 - Present</span>
               </div>
               <p class="description">Developing Multimodal AI (LiDAR + Camera) for static and dynamic object detection and tracking. Building Vision Foundation model-based networks for various autonomous tasks.</p>
-              <p class="description">Manager: <a href="https://scholar.google.com/citations?user=z0a8rsYAAAAJ&hl=en&oi=sra" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Dr. Senthil Yogamani</a>, <a href="https://scholar.google.com/citations?user=Tll071oAAAAJ&hl=en&oi=sra" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Dr. Varun Ravi Kumar</a></p>
+              <p class="description">Manager: <a href="https://scholar.google.com/citations?user=z0a8rsYAAAAJ&hl=en&oi=sra" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Senthil Yogamani</a>, <a href="https://scholar.google.com/citations?user=Tll071oAAAAJ&hl=en&oi=sra" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Dr. Varun Ravi Kumar</a></p>
               <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
             </div>
           </li>
