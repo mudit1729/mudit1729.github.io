@@ -201,6 +201,10 @@
       padding-left: 0.5rem;
       border-left: 2px solid #eee;
     }
+    .description.small {
+      font-size: 0.85rem;
+      color: #777;
+    }
     .skills-container {
       display: flex;
       flex-wrap: wrap;
@@ -274,6 +278,44 @@
       color: #888;
       margin-bottom: 0.4rem;
       font-style: italic;
+    }
+    .education-item {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .education-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.3rem;
+    }
+    .education-item h3 {
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: #333;
+      margin-bottom: 0;
+    }
+    .education-year {
+      font-size: 0.9rem;
+      color: #777;
+      font-weight: 400;
+    }
+    .education-degree {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 0.7rem;
+    }
+    .education-details-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .education-tag {
+      background: #f0f0f0;
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      color: #555;
     }
     @media (max-width: 768px) {
       .sidebar {
@@ -414,19 +456,29 @@
 
       <section id="education" class="education">
         <h2>Education</h2>
-        <div class="education-item">
-          <h3>University of California San Diego (UCSD)</h3>
-          <p class="education-details">Master's degree, Machine Learning and Data Science • 2019-2021</p>
-          <p class="education-details">Graduate Student Researcher [Funded] • Drone Lab at UCSD</p>
-          <p class="education-details">Focus: Computer Vision, Machine Learning, and Reinforcement Learning</p>
-        </div>
-        
-        <div class="education-item">
-          <h3>Birla Institute of Technology and Science, Pilani (BITS Pilani)</h3>
-          <p class="education-details">Bachelor of Engineering (B.E.), Electronics and Communication Engineering • 2012-2016</p>
-          <p class="education-details">Minor in Data Science</p>
-          <p class="education-details">Focus: Embedded Systems, Wireless Networks, and Computer Vision</p>
-        </div>
+        <ul class="experience-list">
+          <li>
+            <div class="experience-item">
+              <div class="experience-header">
+                <span class="position">Master's degree in Electrical and Computer Engineering</span>
+                <span class="company">University of California San Diego (UCSD)</span>
+                <span class="duration">2019-2021</span>
+              </div>
+              <p class="description">Specialization in Machine Learning and Data Science</p>
+              <p class="description small">Courses: Linear Algebra, Probability and Statistics, Statistical Learning, Visual Learning, Computer Vision I & III, GPU Programming, Deep Learning and Applications</p>
+            </div>
+          </li>
+          <li>
+            <div class="experience-item">
+              <div class="experience-header">
+                <span class="position">Bachelor of Engineering (B.E.) in Electronics and Communication</span>
+                <span class="company">Birla Institute of Technology and Science, Pilani</span>
+                <span class="duration">2012-2016</span>
+              </div>
+              <p class="description">Minor in Data Science with focus on Embedded Systems and Computer Vision</p>
+            </div>
+          </li>
+        </ul>
       </section>
 
       <section id="projects" class="projects">
