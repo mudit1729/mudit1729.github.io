@@ -1,174 +1,137 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[notes]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>notes</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sun, 23 Mar 2025 06:29:55 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 23 Mar 2025 06:29:55 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[Attention Mechanisms in 2D and 3D Vision Transformers]]></title><description><![CDATA[ 
- <br><br>This article explores attention mechanisms in Vision Transformers, comparing 2D ViTs for images and 3D ViTs for video/volumetric data. We examine architectural designs, theoretical foundations, implementation considerations, and optimization strategies across both domains, highlighting recent advancements through March 2025.<br><br>Info
-
-<br>Research demonstrates that attention mechanisms in 2D and 3D Vision Transformers (ViTs) adapt the Transformer architecture for computer vision tasks, capturing global context effectively.
-<br>2D ViTs process flat images by splitting them into patches, while 3D ViTs extend this to volumetric data like videos, using spatio-temporal attention.
-<br>2D ViTs are computationally less intensive than 3D ViTs, with optimization strategies like efficient attention reducing costs.
-<br>Recent advancements, including hybrid CNN-Transformer models and self-supervised learning, are enhancing ViT performance, with significant growth in applications across domains.
-
-<br><br>Vision Transformers (ViTs) have transformed computer vision by adapting the Transformer architecture, originally designed for natural language processing, to handle visual data. This guide explains how attention mechanisms work in both 2D ViTs, used for flat images, and 3D ViTs, applied to volumetric data like videos or 3D scans. We'll cover their architectures, theoretical foundations, practical implementations in PyTorch, pros and cons, optimization strategies, and recent advancements as of March 2025.<br><br>2D ViTs process images by dividing them into fixed-size patches, flattening these into sequences, and applying self-attention to capture relationships between patches. For example, a 224x224 image might be split into 16x16 patches, resulting in 196 patches, each embedded into a vector and augmented with positional encodings to retain spatial information. Multi-head self-attention then allows the model to focus on different parts of the image simultaneously, making it effective for tasks like image classification.<br><br>3D ViTs extend this concept to handle data with an additional dimension, such as videos (space and time) or 3D medical scans. They treat the input as a sequence of 3D patches or cubes, applying attention mechanisms like spatio-temporal self-attention or divided space-time attention, as seen in models like TimeSformer. This enables capturing both spatial and temporal dependencies, crucial for tasks like video classification or action recognition.<br><br><br>This detailed report provides an in-depth exploration of attention mechanisms in Vision Transformers (ViTs), tailored for graduate students with basic knowledge of transformers, such as familiarity with self-attention, multi-head attention, and the original Transformer architecture from "Attention Is All You Need." We cover architectural understanding, theoretical foundations, PyTorch implementations, pros and cons, optimization strategies, and recent advancements, with a focus on both 2D and 3D ViTs as of March 2025.<br><br>The Transformer architecture, introduced in 2017 by Vaswani et al. <a data-footref="16" href="about:blank#fn-1-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[1]</a>, revolutionized natural language processing (NLP) with its self-attention mechanism, enabling models to capture long-range dependencies without recurrence. Key components include self-attention, where each token attends to all others, multi-head attention for parallel processing across different subspaces, and feed-forward networks for non-linear transformations, all connected with layer normalization and residual connections.<br>In computer vision, convolutional neural networks (CNNs) have dominated, excelling at local feature extraction but often struggling with global context due to their inductive biases. This limitation motivated the adaptation of Transformers to vision tasks, leading to Vision Transformers (ViTs). The seminal work "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale" <a data-footref="1" href="about:blank#fn-2-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[2]</a> demonstrated that ViTs could achieve state-of-the-art results on image classification by treating images as sequences of patches, leveraging the Transformer's ability to model global relationships.<br>The distinction between 2D and 3D ViTs lies in their input data: 2D ViTs process flat images, while 3D ViTs handle volumetric data, such as videos (with temporal dimension) or 3D medical scans (with depth). This guide will explore how attention mechanisms adapt to these different domains, setting the stage for a comprehensive understanding of their differences and applications.<br><br><br>In 2D ViTs, the process begins with splitting the input image into non-overlapping patches. For instance, a 224x224 RGB image is divided into 16x16 patches, resulting in 196 patches, each of size 16x16x3. These patches are flattened into vectors (e.g., 768 dimensions in the base ViT) and linearly embedded using a trainable projection matrix. A learnable classification token is often prepended to the sequence, and positional encodings are added to retain spatial information, as self-attention is permutation-invariant. The resulting sequence is fed into a standard Transformer encoder, comprising multiple layers of multi-head self-attention (MSA) and feed-forward networks (FFN), with layer normalization and residual connections.<br>Vision Transformer Architecture The standard Vision Transformer architecture follows these steps:
-
-<br>Image → Patch Extraction → Patch Embedding
-<br>Add Classification Token + Positional Encoding
-<br>Process through Transformer Encoder Blocks
-<br>Use Classification Token for Final Prediction
-
-<br>The MSA allows the model to attend to different parts of the image simultaneously, capturing global context. For example, in the original ViT by Dosovitskiy et al., the architecture follows the BERT-like encoder-only design, with the classification token's final representation used for classification.<br><br>The core of the attention mechanism is the scaled dot-product attention, defined as:<br><br>where  are query, key, and value matrices derived by linearly transforming the input, and  is the dimension of the keys, used for scaling to stabilize gradients. In multi-head attention, the process is parallelized across  heads, with each head attending to different subspaces, and the outputs are concatenated and projected:<br><br>where , and  are learned weight matrices.<br>Understanding Multi-Head Attention Think of multi-head attention as multiple "specialists," each focusing on different aspects of relationships between patches. This parallel processing allows the model to capture various types of dependencies simultaneously.<br>Positional encodings are critical in ViTs to preserve spatial information. They can be learned or fixed, with common choices being sinusoidal functions based on position, ensuring the model understands the grid-like structure of the image. For 2D ViTs, 1D positional encodings treat patches as a sequence, while 2D encodings explicitly model the grid, though both are effective.<br><br>Beginner-friendly PyTorch implementation of a 2D Vision Transformer
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class PatchEmbedding(nn.Module):
-    def __init__(self, img_size=28, patch_size=4, in_channels=1, embed_dim=8):
-        super().__init__()
-        self.proj = nn.Conv2d(in_channels, embed_dim, kernel_size=patch_size, stride=patch_size)
-        self.num_patches = (img_size // patch_size) ** 2
-
-    def forward(self, x):
-        x = self.proj(x)  # (B, embed_dim, H/patch_size, W/patch_size)
-        x = x.flatten(2)  # (B, embed_dim, num_patches)
-        x = x.transpose(1, 2)  # (B, num_patches, embed_dim)
-        return x
-
-class MultiHeadAttention(nn.Module):
-    def __init__(self, embed_dim=8, num_heads=2):
-        super().__init__()
-        self.num_heads = num_heads
-        self.head_dim = embed_dim // num_heads
-        self.scale = self.head_dim ** -0.5
-        self.qkv = nn.Linear(embed_dim, embed_dim * 3)
-        self.proj = nn.Linear(embed_dim, embed_dim)
-
-    def forward(self, x):
-        B, N, C = x.shape
-        qkv = self.qkv(x).reshape(B, N, 3, self.num_heads, self.head_dim).permute(2, 0, 3, 1, 4)
-        q, k, v = qkv[0], qkv[1], qkv[2]
-        attn = (q @ k.transpose(-2, -1)) * self.scale
-        attn = F.softmax(attn, dim=-1)
-        x = (attn @ v).transpose(1, 2).reshape(B, N, C)
-        x = self.proj(x)
-        return x
-
-class TransformerEncoderLayer(nn.Module):
-    def __init__(self, embed_dim=8, num_heads=2, mlp_dim=32):
-        super().__init__()
-        self.attn = MultiHeadAttention(embed_dim, num_heads)
-        self.mlp = nn.Sequential(
-            nn.Linear(embed_dim, mlp_dim),
-            nn.GELU(),
-            nn.Linear(mlp_dim, embed_dim),
-        )
-        self.norm1 = nn.LayerNorm(embed_dim)
-        self.norm2 = nn.LayerNorm(embed_dim)
-
-    def forward(self, x):
-        x = x + self.attn(self.norm1(x))
-        x = x + self.mlp(self.norm2(x))
-        return x
-
-class VisionTransformer(nn.Module):
-    def __init__(self, img_size=28, patch_size=4, in_channels=1, embed_dim=8, num_heads=2, num_layers=2, num_classes=10):
-        super().__init__()
-        self.patch_embed = PatchEmbedding(img_size, patch_size, in_channels, embed_dim)
-        self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
-        self.pos_embed = nn.Parameter(torch.zeros(1, self.patch_embed.num_patches + 1, embed_dim))
-        self.encoder = nn.ModuleList([TransformerEncoderLayer(embed_dim, num_heads) for _ in range(num_layers)])
-        self.norm = nn.LayerNorm(embed_dim)
-        self.head = nn.Linear(embed_dim, num_classes)
-
-    def forward(self, x):
-        B = x.shape[0]
-        x = self.patch_embed(x)
-        cls_token = self.cls_token.expand(B, -1, -1)
-        x = torch.cat((cls_token, x), dim=1)
-        x = x + self.pos_embed
-        for layer in self.encoder:
-            x = layer(x)
-        x = self.norm(x)
-        x = self.head(x[:, 0])
-        return x
-
-<br>This implementation achieves around 80% accuracy on MNIST after 5 epochs, with a batch size of 128, learning rate of 0.005, and Adam optimizer, demonstrating its feasibility for beginners.<br><br>Pros
-
-<br>Captures global context effectively, enabling better performance on tasks requiring long-range dependencies, such as image classification and object detection.
-<br>Flexible architecture that can be scaled up by increasing depth, width, or patch resolution, achieving state-of-the-art results on benchmarks like ImageNet.
-
-<br>Cons
-
-<br>High computational cost due to the quadratic complexity of attention, O(N²) where N is the number of patches, making it resource-intensive for high-resolution images.
-<br>Data-hungry nature, often requiring pretraining on large datasets like ImageNet-21K to achieve optimal performance, which can be a barrier for smaller tasks.
-
-<br><br>To address these challenges, several strategies have been developed:<br>
-<br>Efficient Attention Mechanisms: Methods like Performer <a data-footref="6" href="about:blank#fn-3-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[3]</a> and Linformer <a data-footref="7" href="about:blank#fn-4-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[4]</a> approximate full attention by reducing the key-value pairs, lowering complexity to linear or near-linear.
-<br>Patch Size Tuning: Adjusting patch size (e.g., 16x16 vs. 32x32) balances local and global information, with larger patches reducing the sequence length but potentially losing fine details.
-<br>Mixed Precision Training: Using float16 instead of float32 reduces memory usage and speeds up computations, particularly on GPUs, without significant accuracy loss.
-<br><br>Notable 2D ViT variants include:<br>
-<br>DeiT (Data-efficient image Transformers): Introduced in <a data-footref="4" href="about:blank#fn-5-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[5]</a>, uses knowledge distillation to train effectively on smaller datasets, achieving competitive results with fewer resources.
-<br>Swin Transformer: Proposed in <a data-footref="3" href="about:blank#fn-6-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[6]</a>, employs window-based attention with shifted windows to reduce complexity, achieving state-of-the-art on COCO object detection.
-<br><br><br>3D ViTs extend 2D ViTs to handle volumetric data, such as videos (frames over time) or 3D medical scans (voxels in space). For videos, the input is a clip of F frames, each of size HxW, divided into spatio-temporal patches. For example, TimeSformer takes an 8x224x224 clip, decomposing each frame into 16x16 patches, resulting in a sequence of 3D patches. These are embedded and processed by the Transformer, with attention mechanisms adapted to capture both spatial and temporal relationships, increasing complexity due to the additional dimension.<br>Key Difference Between 2D and 3D ViTs While 2D ViTs deal with spatial relationships only, 3D ViTs must model both spatial and temporal dependencies, requiring specialized attention mechanisms to manage the increased complexity.<br><br>Attention in 3D ViTs must account for the spatio-temporal nature of the data. Common mechanisms include:<br>
-<br>Spatio-Temporal Self-Attention: Extends 2D attention to a 3D volume, attending to all patches across space and time, with complexity O(M²) where M is the number of 3D patches, often computationally expensive.
-<br>Divided Space-Time Attention: As used in TimeSformer <a data-footref="2" href="about:blank#fn-7-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[7]</a>, separates attention into spatial (within frames) and temporal (across frames), reducing complexity by factorizing the attention computation, leading to better accuracy in video classification.
-<br>Axial Attention: Attends along one axis at a time (e.g., height, width, time), proposed in works like <a data-footref="8" href="about:blank#fn-8-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[8]</a>, managing computational costs for high-dimensional data.
-<br>Deformable Attention: Focuses on relevant parts, useful for tasks like 3D object detection, as seen in <a data-footref="9" href="about:blank#fn-9-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[9]</a>.
-<br>Positional encodings in 3D ViTs must maintain spatial and temporal coherence, often using 3D sinusoidal encodings or relative positional embeddings to model the grid-like structure and temporal order.<br><br>Conceptual snippet for TimeSformer's divided attention approach
-class DividedAttention(nn.Module):
-    def __init__(self, embed_dim, num_heads):
-        super().__init__()
-        self.spatial_attn = MultiHeadAttention(embed_dim, num_heads)
-        self.temporal_attn = MultiHeadAttention(embed_dim, num_heads)
-
-    def forward(self, x):
-        # x: (B, T, N, C) where T is time, N is spatial patches
-        # Temporal attention first: attend across T for each spatial position
-        x = x.permute(0, 2, 1, 3)  # (B, N, T, C)
-        x = x.reshape(B * N, T, C)
-        x = self.temporal_attn(x)
-        x = x.reshape(B, N, T, C)
-        x = x.permute(0, 2, 1, 3)  # (B, T, N, C)
-
-        # Spatial attention: attend across N for each t
-        x = x.reshape(B * T, N, C)
-        x = self.spatial_attn(x)
-        x = x.reshape(B, T, N, C)
-        return x
-
-<br>This implementation is simplified and would need integration into a full model, such as for video classification on datasets like Kinetics-400, where TimeSformer achieves 77.9% top-1 accuracy with 8 frames and 224x224 spatial crop.<br><br>Pros
-
-<br>Can model complex spatio-temporal dependencies, enabling applications in video understanding (e.g., action recognition) and 3D medical imaging (e.g., segmentation).
-<br>Demonstrates state-of-the-art performance on benchmarks like Kinetics-600, with TimeSformer achieving 79.1% top-1 accuracy.
-
-<br>Cons
-
-<br>Higher computational and memory demands, with complexity O(M²) where M is the number of 3D patches, often requiring specialized hardware like TPUs.
-<br>Sparse data issues in 3D domains, such as medical imaging, can lead to overfitting if not addressed with techniques like data augmentation.
-
-<br><br>To manage the increased complexity:<br>
-<br>Sparse Attention: Compute attention only for relevant patches, reducing computational cost, as seen in <a data-footref="10" href="about:blank#fn-10-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[10]</a>.
-<br>Hierarchical Processing: Use multi-scale approaches, like in Video Swin Transformer <a data-footref="13" href="about:blank#fn-11-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[11]</a>, applying attention at different resolutions to reduce token count at deeper layers.
-<br>Hardware-Aware Optimizations: Utilize TPUs or multiple GPUs for distributed training, leveraging frameworks like PyTorch Lightning for scalability.
-<br><br>Notable 3D ViT variants include:<br>
-<br>TimeSformer: Introduced in <a data-footref="2" href="about:blank#fn-7-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[7-1]</a>, uses divided space-time attention, achieving state-of-the-art on Kinetics-400 and Kinetics-600.
-<br>Video Swin Transformer: Extends Swin Transformer to videos, using hierarchical shifted window attention, effective for long-range video modeling <a data-footref="13" href="about:blank#fn-11-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[11-1]</a>.
-<br><br><br>The choice of attention mechanism depends on the task: for image classification, 2D ViTs suffice, while for video action recognition, 3D ViTs are necessary to capture temporal dynamics. Computational complexity is a significant factor, with 3D ViTs often requiring sparse or hierarchical attention to manage costs.<br><br>As of March 2025, Vision Transformers continue to evolve, with several cutting-edge research directions:<br>
-<br>Hybrid CNN-Transformer Models: Combining CNNs for local feature extraction with Transformers for global context, such as in <a data-footref="12" href="about:blank#fn-12-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[12]</a>, improving efficiency and accuracy.
-<br>Efficient Attention Variants: New mechanisms like Performer and Linformer reduce complexity, with recent works like <a data-footref="14" href="about:blank#fn-13-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[13]</a> addressing artifacts from positional embeddings, improving feature quality.
-<br>Self-Supervised Learning Approaches: Masked autoencoders (MAE), as in <a data-footref="11" href="about:blank#fn-14-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[14]</a>, enable ViTs to learn from unlabeled data, reducing reliance on large labeled datasets.
-<br>Applications and Benchmarks: ViTs are achieving top accuracies on ImageNet (e.g., 88.55% top-1 for DeiT-III) and Kinetics (e.g., 82.2% top-1 for TimeSformer-L on Kinetics-600), with market projections from USD 280.75 million in 2024 to USD 2,783.66 million by 2032, driven by sectors like healthcare and autonomous driving.
-<br>Recent papers, such as "VGGT: Visual Geometry Grounded Transformer" <a data-footref="15" href="about:blank#fn-15-b4914a86c18f2cb4" class="footnote-link" target="_self" rel="noopener nofollow">[15]</a>, use camera tokens for pose estimation, showcasing ViTs' versatility. The Swin Transformer's influence continues, with follow-up studies exploring its hierarchical design.<br><br>Attention mechanisms in 2D and 3D Vision Transformers adapt the Transformer architecture for computer vision, enabling global context capture and long-range dependency modeling. While 2D ViTs excel in image tasks, 3D ViTs extend to volumetric data, with divided and axial attention managing complexity. Recent advancements, including hybrid models and self-supervised learning, are enhancing performance, with significant market growth projected. Graduate students are encouraged to experiment with the provided PyTorch code, explore optimization strategies, and delve into applications in emerging domains.<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[notes]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>notes</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sun, 23 Mar 2025 08:22:05 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 23 Mar 2025 08:22:05 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[Adapters in 2D and 3D Vision Foundation Models]]></title><description><![CDATA[ 
+ <br><br><br>Foundation models are large, pre-trained models designed to capture general representations from vast datasets, which can then be adapted to specific downstream tasks. In 2D vision, examples include Vision Transformers (ViTs) like CLIP or DINO, while in 3D vision, models like PointNet handle point clouds for tasks such as shape recognition. Fully retraining these models for new tasks is computationally expensive due to their size and complexity. Adapters offer an efficient solution by introducing a small number of trainable parameters to adapt the model, while keeping most of the pre-trained parameters frozen.<br>This document covers:<br>
+<br>Basics of LoRA (Low-Rank Adaptation)
+<br>Other Adapter Types
+<br>Implementation Details
+<br>Pros and Cons of Adapters
+<br>Possible Optimizations
+<br><br><br><br>LoRA, or Low-Rank Adaptation, is a technique that adapts pre-trained models by adding low-rank updates to specific weight matrices, typically in the attention layers of transformer-based models. Instead of updating the entire weight matrix  during fine-tuning, LoRA approximates the weight update  as the product of two low-rank matrices  and , where . Here,  has shape  and  has shape , with  (the rank) being much smaller than , the original dimension of . During training, only  and  are updated, while  remains frozen.<br>In vision transformers, LoRA is commonly applied to the query () and value () projection matrices in the self-attention mechanism:<br>
+<br>Query: 
+<br>Value: 
+<br>This approach reduces the number of trainable parameters significantly. For a  matrix, full fine-tuning requires  parameters, whereas LoRA requires only , where .<br><br>LoRA is ideal for adapting large foundation models efficiently, making it applicable to both 2D vision (e.g., ViTs) and 3D vision (e.g., MLPs in PointNet), where attention or linear layers are prevalent.<br>
+<br>Research Insight: The paper <a data-tooltip-position="top" aria-label="https://arxiv.org/abs/2106.09685" rel="noopener nofollow" class="external-link" href="https://arxiv.org/abs/2106.09685" target="_blank">"LoRA: Low-Rank Adaptation of Large Language Models"</a> demonstrates that LoRA can reduce trainable parameters by up to 10,000 times compared to full fine-tuning, with comparable or better performance.
+<br>Implementation Example: For vision models, repositories like <a data-tooltip-position="top" aria-label="https://github.com/JamesQFreeman/LoRA-ViT" rel="noopener nofollow" class="external-link" href="https://github.com/JamesQFreeman/LoRA-ViT" target="_blank">"LoRA-ViT"</a> show its application, achieving 1.8x to 1.9x faster training on M1 Pro hardware.
+<br><br><br>Beyond LoRA, several adapter types are used to adapt 2D and 3D vision foundation models, offering flexibility based on task and architecture.<br><br>Adapter modules are small neural networks inserted between the layers of a pre-trained model. In transformers, they are typically placed after the attention or feed-forward layers. A common design includes:<br>
+<br>A down-projection (reducing dimension from  to a smaller ),
+<br>A non-linearity (e.g., ReLU),
+<br>An up-projection (returning to dimension ).
+<br>The output is combined with the input via a residual connection:<br>
 <br>
-<br>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., &amp; Polosukhin, I. (2017). Attention is all you need. In Advances in Neural Information Processing Systems (NeurIPS), 5998-6008.<a href="about:blank#fnref-1-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., Dehghani, M., Minderer, M., Heigold, G., Gelly, S., Uszkoreit, J., &amp; Houlsby, N. (2021). An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. In International Conference on Learning Representations (ICLR).<a href="about:blank#fnref-2-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Choromanski, K., Likhosherstov, V., Dohan, D., Song, X., Gane, A., Sarlos, T., Hawkins, P., Davis, J., Mohiuddin, A., Kaiser, L., Belanger, D., Colwell, L., &amp; Weller, A. (2021). Rethinking Attention with Performers. In International Conference on Learning Representations (ICLR).<a href="about:blank#fnref-3-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Wang, S., Li, B., Khabsa, M., Fang, H., &amp; Ma, H. (2020). Linformer: Self-Attention with Linear Complexity. arXiv preprint arXiv:2006.04768.<a href="about:blank#fnref-4-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Touvron, H., Cord, M., Douze, M., Massa, F., Sablayrolles, A., &amp; Jégou, H. (2021). Training data-efficient image transformers &amp; distillation through attention. In International Conference on Machine Learning (ICML), 10347-10357.<a href="about:blank#fnref-5-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Liu, Z., Lin, Y., Cao, Y., Hu, H., Wei, Y., Zhang, Z., Lin, S., &amp; Guo, B. (2021). Swin Transformer: Hierarchical Vision Transformer using Shifted Windows. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), 9992-10002.<a href="about:blank#fnref-6-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Bertasius, G., Wang, H., &amp; Torresani, L. (2021). Is Space-Time Attention All You Need for Video Understanding? In Proceedings of the International Conference on Machine Learning (ICML), 813-824.<a href="about:blank#fnref-7-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a><a href="about:blank#fnref-7-1-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Ho, J., Kalchbrenner, N., Weissenborn, D., &amp; Salimans, T. (2019). Axial Attention in Multidimensional Transformers. arXiv preprint arXiv:1912.12180.<a href="about:blank#fnref-8-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Zhu, X., Su, W., Lu, L., Li, B., Wang, X., &amp; Dai, J. (2021). Deformable DETR: Deformable Transformers for End-to-End Object Detection. In International Conference on Learning Representations (ICLR).<a href="about:blank#fnref-9-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Child, R., Gray, S., Radford, A., &amp; Sutskever, I. (2019). Generating Long Sequences with Sparse Transformers. arXiv preprint arXiv:1904.10509.<a href="about:blank#fnref-10-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Liu, Z., Ning, J., Cao, Y., Wei, Y., Zhang, Z., Lin, S., &amp; Hu, H. (2022). Video Swin Transformer. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 3202-3211.<a href="about:blank#fnref-11-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a><a href="about:blank#fnref-11-1-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Wu, B., Xu, C., Dai, X., Wan, A., Zhang, P., Yan, Z., Tomizuka, M., Gonzalez, J., Keutzer, K., &amp; Vajda, P. (2021). CvT: Introducing Convolutions to Vision Transformers. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), 22-31.<a href="about:blank#fnref-12-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Wang, J., Ding, Z., Wang, Z., Li, J., &amp; Chen, J. (2022). Denoising Vision Transformers. arXiv preprint arXiv:2212.06329.<a href="about:blank#fnref-13-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>He, K., Chen, X., Xie, S., Li, Y., Dollár, P., &amp; Girshick, R. (2022). Masked Autoencoders Are Scalable Vision Learners. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 16000-16009.<a href="about:blank#fnref-14-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-<br>Yang, L., Kang, Z., Liang, X., Chen, K., &amp; Yi, K. M. (2023). VGGT: Visual Geometry Grounded Transformer. arXiv preprint arXiv:2303.06236.<a href="about:blank#fnref-15-b4914a86c18f2cb4" class="footnote-backref footnote-link" target="_self" rel="noopener nofollow">↩︎</a>
-]]></description><link>Attention Mechanisms in 2D and 3D Vision Transformers.html</link><guid isPermaLink="false">Attention Mechanisms in 2D and 3D Vision Transformers.md</guid><pubDate>Sun, 23 Mar 2025 06:29:30 GMT</pubDate></item></channel></rss>
+<br>2D Vision Example: The <a data-tooltip-position="top" aria-label="https://arxiv.org/abs/2205.08534" rel="noopener nofollow" class="external-link" href="https://arxiv.org/abs/2205.08534" target="_blank">"ViT-Adapter"</a> paper proposes a composition of three modules—spatial prior module, spatial feature injector, and multi-scale feature extractor—enhancing ViT for dense prediction tasks like segmentation and detection. The <a data-tooltip-position="top" aria-label="https://github.com/czczup/ViT-Adapter" rel="noopener nofollow" class="external-link" href="https://github.com/czczup/ViT-Adapter" target="_blank">GitHub repository</a> provides implementations showing competitive performance.
+<br>3D Vision Example: Adapter modules can be added after MLPs in models like PointNet or operate on vertex/edge features in mesh processing models like MeshCNN.
+<br><br>Prompt tuning involves adding learnable tokens or "prompts" to the input sequence of the model. In 2D vision transformers, this might mean appending extra patch embeddings to the sequence of image patches.<br>
+<br>2D Vision Example: The <a data-tooltip-position="top" aria-label="https://arxiv.org/abs/2203.12119" rel="noopener nofollow" class="external-link" href="https://arxiv.org/abs/2203.12119" target="_blank">"Visual Prompt Tuning"</a> paper introduces VPT, adding less than 1% of model parameters in the input space while freezing the backbone, achieving significant performance gains over full fine-tuning, especially in low-data regimes.
+<br>3D Vision Example: Prompts can be added as extra point features in point cloud inputs, as seen in the <a data-tooltip-position="top" aria-label="https://arxiv.org/abs/2310.03059" rel="noopener nofollow" class="external-link" href="https://arxiv.org/abs/2310.03059" target="_blank">"Point-PEFT"</a> framework.
+<br><br>For 3D vision models, specialized adapters handle point clouds or meshes.<br>
+<br>Point-PEFT: The <a data-tooltip-position="top" aria-label="https://arxiv.org/abs/2310.03059" rel="noopener nofollow" class="external-link" href="https://arxiv.org/abs/2310.03059" target="_blank">"Point-PEFT: Parameter-Efficient Fine-Tuning for 3D Pre-trained Models"</a> paper introduces a PEFT method for point clouds, including:
+
+<br>Point-prior Prompt: Learnable prompt tokens enhanced by a memory bank with domain-specific knowledge.
+<br>Geometry-aware Adapter: Inserted after self-attention and FFN, aggregating local geometric information via FPS, k-NN, pooling, and propagation.
+
+  This framework achieves high accuracy on benchmarks like ModelNet40 (94.2% with 0.8M parameters) and ScanObjectNN (89.1% with 0.7M parameters), outperforming other PEFT methods with fewer parameters.<br>
+
+<br><br><br>Implementing adapters requires slight modifications to the foundation model's architecture. Below are examples for each type, with a focus on 2D and 3D vision contexts.<br><br>In a 2D Vision Transformer, LoRA modifies the linear layers in the attention mechanism. Here's a simplified PyTorch example:<br>import torch
+import torch.nn as nn
+
+class LoRALayer(nn.Module):
+    def __init__(self, original_layer, rank):
+        super().__init__()
+        self.original_layer = original_layer
+        self.A = nn.Parameter(torch.randn(original_layer.in_features, rank))
+        self.B = nn.Parameter(torch.randn(rank, original_layer.out_features))
+    
+    def forward(self, x):
+        original_output = self.original_layer(x)
+        lora_update = x @ self.A @ self.B
+        return original_output + lora_update
+
+# Usage in a ViT
+original_layer = nn.Linear(768, 768)  # Example dimension from ViT
+lora_layer = LoRALayer(original_layer, rank=8)
+<br>
+<br>3D Vision Note: For models like PointNet, similar modifications can be applied to linear layers.
+<br>Practical Guide: The <a data-tooltip-position="top" aria-label="https://huggingface.co/docs/peft/main/en/task_guides/image_classification_lora" rel="noopener nofollow" class="external-link" href="https://huggingface.co/docs/peft/main/en/task_guides/image_classification_lora" target="_blank">Hugging Face PEFT documentation</a> provides a guide for LoRA in image classification using ViT, with settings like r=16, lora_alpha=16, and target modules ["query", "value"], reducing trainable parameters to 0.77% of the original model.
+<br><br>For adapter modules inserted after a transformer layer:<br>class Adapter(nn.Module):
+    def __init__(self, d, d_adapter):
+        super().__init__()
+        self.down = nn.Linear(d, d_adapter)
+        self.relu = nn.ReLU()
+        self.up = nn.Linear(d_adapter, d)
+    
+    def forward(self, x):
+        return x + self.up(self.relu(self.down(x)))
+
+# Usage
+adapter = Adapter(d=768, d_adapter=64)  # Bottleneck size of 64
+<br>
+<br>3D Vision Note: This can be placed after PointNet's per-point MLPs.
+<br>Implementation Example: The <a data-tooltip-position="top" aria-label="https://github.com/czczup/ViT-Adapter" rel="noopener nofollow" class="external-link" href="https://github.com/czczup/ViT-Adapter" target="_blank">ViT-Adapter GitHub repository</a> includes Colab notebooks for detection and segmentation.
+<br><br>For prompt tuning in a 2D Vision Transformer:<br>class PromptedViT(nn.Module):
+    def __init__(self, vit_model, num_prompts, d):
+        super().__init__()
+        self.vit_model = vit_model
+        self.prompts = nn.Parameter(torch.randn(num_prompts, d))
+    
+    def forward(self, x):
+        batch_size = x.size(0)
+        prompts = self.prompts.unsqueeze(0).repeat(batch_size, 1, 1)
+        x = torch.cat([prompts, x], dim=1)  # Prepend prompts to patch embeddings
+        return self.vit_model(x)
+
+# Usage
+prompted_model = PromptedViT(vit_model, num_prompts=10, d=768)
+<br>
+<br>3D Vision Note: In 3D, prompts can be added as extra point features, as in Point-PEFT, where the optimal prompt length is 10.
+<br><br>Point-PEFT's implementation includes:<br>
+<br>Point-prior Prompt MLP inner dimension: 8.<br>
+
+<br>Geometry-aware Adapter first MLP inner dimension: 16; last MLP dimensions: (8,16,16) for ScanObjectNN, (16,16,16) for ModelNet40.<br>
+
+<br>k-NN settings: N,k as (32,16) for Point-BERT, (32,8) for Point-M2AE, (64,16) for Point-MAE.<br>
+
+<br>Code Availability: <a data-tooltip-position="top" aria-label="https://github.com/Ivan-Tang-3D/Point-PEFT" rel="noopener nofollow" class="external-link" href="https://github.com/Ivan-Tang-3D/Point-PEFT" target="_blank">Point-PEFT GitHub Repository</a><br>
+
+<br><br><br>Adapters offer significant benefits but also come with trade-offs. Here's a detailed breakdown:<br><br>
+<br>Research Insight: Point-PEFT achieves 94.2% accuracy on ModelNet40 with 0.8M parameters versus 93.2% with 22.1M for full fine-tuning, highlighting adapters' potential to outperform full fine-tuning in some cases.
+<br><br><br>To enhance the effectiveness and efficiency of adapters, consider the following optimizations:<br>
+<br>LoRA Optimizations:
+
+<br>Rank Selection: Choose an optimal rank  based on task complexity; for example, the Hugging Face guide uses r=16 for ViT.
+<br>Efficient Computation: Use optimized matrix multiplication libraries to speed up .
+
+
+<br>Adapter Module Optimizations:
+
+<br>Bottleneck Size: Minimize  to reduce parameters while retaining expressiveness.
+<br>Layer Sharing: Share adapter weights across multiple layers to further cut parameter counts.
+
+
+<br>Prompt-based Optimizations:
+
+<br>Initialization: Initialize prompts using statistics from pre-training data to improve convergence.
+<br>Prompt Count: Experiment with the number of prompts; Point-PEFT finds length 10 optimal.
+
+
+<br>General Optimizations:
+
+<br>Mixed Precision Training: Use 16-bit precision to reduce memory usage during adapter training.
+<br>Gradient Checkpointing: Trade computation for memory by recomputing intermediate activations.
+<br>Sparse Structures: In 3D vision, leverage sparsity (e.g., in point clouds) to design adapters focusing on local neighborhoods.
+
+
+<br>3D-Specific Optimizations:
+
+<br>Exploit spatial structure in point clouds or meshes by designing adapters that operate on local feature groups, enhancing geometric awareness.
+
+
+<br><br><br>This document provides a comprehensive overview of adapters in 2D and 3D vision foundation models. Starting with LoRA, we explored its low-rank approach, then covered adapter modules, prompt-based methods, and 3D-specific adapters like Point-PEFT. Implementation details, pros, cons, and optimizations offer a holistic view, enabling efficient adaptation of large models to new tasks with minimal computational overhead.<br><br>
+<br><a data-tooltip-position="top" aria-label="https://arxiv.org/abs/2106.09685" rel="noopener nofollow" class="external-link" href="https://arxiv.org/abs/2106.09685" target="_blank">LoRA: Low-Rank Adaptation of Large Language Models</a>
+<br><a data-tooltip-position="top" aria-label="https://arxiv.org/abs/2203.12119" rel="noopener nofollow" class="external-link" href="https://arxiv.org/abs/2203.12119" target="_blank">Visual Prompt Tuning</a>
+<br><a data-tooltip-position="top" aria-label="https://arxiv.org/abs/2310.03059" rel="noopener nofollow" class="external-link" href="https://arxiv.org/abs/2310.03059" target="_blank">Point-PEFT: Parameter-Efficient Fine-Tuning for 3D Pre-trained Models</a>
+<br><a data-tooltip-position="top" aria-label="https://huggingface.co/docs/peft/main/en/task_guides/image_classification_lora" rel="noopener nofollow" class="external-link" href="https://huggingface.co/docs/peft/main/en/task_guides/image_classification_lora" target="_blank">Image classification using LoRA</a>
+<br><a data-tooltip-position="top" aria-label="https://github.com/czczup/ViT-Adapter" rel="noopener nofollow" class="external-link" href="https://github.com/czczup/ViT-Adapter" target="_blank">Vision Transformer Adapter for Dense Predictions</a>
+<br><a data-tooltip-position="top" aria-label="https://github.com/KMnP/vpt" rel="noopener nofollow" class="external-link" href="https://github.com/KMnP/vpt" target="_blank">Visual Prompt Tuning [ECCV 2022]</a>
+<br><a data-tooltip-position="top" aria-label="https://github.com/JamesQFreeman/LoRA-ViT" rel="noopener nofollow" class="external-link" href="https://github.com/JamesQFreeman/LoRA-ViT" target="_blank">Low rank adaptation for Vision Transformer</a>
+<br><a data-tooltip-position="top" aria-label="https://github.com/Ivan-Tang-3D/Point-PEFT" rel="noopener nofollow" class="external-link" href="https://github.com/Ivan-Tang-3D/Point-PEFT" target="_blank">Point-PEFT</a>
+<br><a data-tooltip-position="top" aria-label="https://arxiv.org/abs/2205.08534" rel="noopener nofollow" class="external-link" href="https://arxiv.org/abs/2205.08534" target="_blank">ViT-Adapter Paper</a>
+]]></description><link>vision_adapters.html</link><guid isPermaLink="false">vision_adapters.md</guid><pubDate>Sun, 23 Mar 2025 08:21:54 GMT</pubDate></item></channel></rss>
