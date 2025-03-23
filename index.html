@@ -21,20 +21,40 @@
   </noscript>
   <style>
     /* Critical CSS for above-the-fold content */
-    body {font-family:'Inter',sans-serif;background:#fff;color:#333;line-height:1.6;}
+    body {font-family:'Inter',sans-serif;background:#fff;color:#333;line-height:1.6;transition:background-color 0.3s ease, color 0.3s ease;}
+    body.dark-mode {background:#1a1a1a;color:#eee;}
     .container {display:flex;min-height:100vh;}
-    .sidebar {width:300px;padding:2rem;position:fixed;top:0;left:0;bottom:0;background:#fff;border-right:1px solid #f0f0f0;display:flex;flex-direction:column;}
+    .sidebar {width:300px;padding:2rem;position:fixed;top:0;left:0;bottom:0;background:#fff;border-right:1px solid #f0f0f0;display:flex;flex-direction:column;transition:background-color 0.3s ease, border-color 0.3s ease;}
+    body.dark-mode .sidebar {background:#1a1a1a;border-right:1px solid #333;}
     .profile-section {display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:1rem;flex:0 0 auto;}
     .profile-img {width:120px;height:120px;border-radius:50%;object-fit:cover;}
     .header-title {text-align:center;margin-bottom:1rem;}
     .sidebar h1 {font-weight:500;letter-spacing:-0.5px;font-size:1.5rem;margin-bottom:0.5rem;}
     .social-icons {display:flex;gap:0.8rem;justify-content:center;margin-bottom:1rem;}
     .social-icons a {color:#555;font-size:1.1rem;transition:color 0.3s ease;}
+    body.dark-mode .social-icons a {color:#aaa;}
     .nav-container {flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;margin:2rem 0;}
     .nav-links {list-style:none;}
     .nav-links li {margin-bottom:0.8rem;}
     .nav-links a {display:block;padding:0.5rem;text-decoration:none;color:#555;font-size:0.95rem;transition:all 0.3s ease;border-left:2px solid transparent;}
+    body.dark-mode .nav-links a {color:#aaa;}
     .main-content {margin-left:300px;padding:2rem;width:calc(100% - 300px);transition:margin-left 0.5s ease,width 0.5s ease;}
+    .theme-switch-wrapper {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      z-index: 10;
+    }
+    .theme-switch {display:inline-block;position:relative;width:50px;height:24px;}
+    .theme-switch input {opacity:0;width:0;height:0;}
+    .slider {position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#ccc;transition:.4s;border-radius:24px;}
+    .slider:before {position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background-color:white;transition:.4s;border-radius:50%;}
+    input:checked + .slider {background-color:#6a5acd;}
+    input:checked + .slider:before {transform:translateX(26px);}
+    .theme-icon {margin:0 6px;font-size:14px;color:#555;}
+    body.dark-mode .theme-icon {color:#aaa;}
   </style>
   <style>
     /* Basic Reset */
@@ -50,6 +70,11 @@
       color: #333;
       line-height: 1.6;
       overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.dark-mode {
+      background: #1a1a1a;
+      color: #eee;
     }
     .container {
       display: flex;
@@ -66,9 +91,23 @@
       background: #fff;
       border-right: 1px solid #f0f0f0;
       overflow-y: hidden; /* Hide scrollbar */
-      transition: transform 0.5s ease;
+      transition: transform 0.5s ease, background-color 0.3s ease, border-color 0.3s ease;
       display: flex;
       flex-direction: column;
+    }
+    body.dark-mode .sidebar {
+      background: #1a1a1a;
+      border-right: 1px solid #333;
+    }
+    body.dark-mode section h2,
+    body.dark-mode .position,
+    body.dark-mode .education-item h3,
+    body.dark-mode .project-item h3,
+    body.dark-mode .award-item h3,
+    body.dark-mode .blog-item h3,
+    body.dark-mode .company,
+    body.dark-mode h3 {
+      color: #eee;
     }
     .main-content {
       margin-left: 300px;
@@ -102,6 +141,7 @@
       letter-spacing: -0.5px;
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
     }
     .social-icons {
       display: flex;
@@ -116,6 +156,12 @@
     }
     .social-icons a:hover {
       color: #000;
+    }
+    body.dark-mode .social-icons a {
+      color: #aaa;
+    }
+    body.dark-mode .social-icons a:hover {
+      color: #fff;
     }
     .profile-section {
       display: flex;
@@ -166,6 +212,14 @@
     .download-cv:hover {
       background: #e9e9e9;
     }
+    body.dark-mode .download-cv {
+      background: #2a2a2a;
+      color: #eee;
+      border: 1px solid #444;
+    }
+    body.dark-mode .download-cv:hover {
+      background: #333;
+    }
     .nav-links {
       list-style: none;
     }
@@ -187,6 +241,14 @@
       border-left: 2px solid #ddd;
       padding-left: 0.8rem;
     }
+    body.dark-mode .nav-links a {
+      color: #aaa;
+    }
+    body.dark-mode .nav-links a:hover, body.dark-mode .nav-links a.active {
+      color: #fff;
+      background: #2a2a2a;
+      border-left: 2px solid #555;
+    }
     section {
       margin-bottom: 4rem;
       padding-top: 1rem;
@@ -199,6 +261,7 @@
       color: #111;
       position: relative;
       padding-bottom: 0.8rem;
+      transition: color 0.3s ease;
     }
     section h2::after {
       content: "";
@@ -208,6 +271,13 @@
       height: 1px;
       width: 3rem;
       background: #333;
+      transition: background-color 0.3s ease;
+    }
+    body.dark-mode section h2::after {
+      background: #ccc;
+    }
+    body.dark-mode .sidebar h1 {
+      color: #eee;
     }
     .news p {
       margin-bottom: 0.8rem;
@@ -219,6 +289,19 @@
       font-size: 0.95rem;
       max-width: 650px;
       line-height: 1.7;
+      transition: color 0.3s ease;
+    }
+    body.dark-mode p,
+    body.dark-mode .company a,
+    body.dark-mode .duration,
+    body.dark-mode .location,
+    body.dark-mode .description,
+    body.dark-mode .project-meta,
+    body.dark-mode .award-meta,
+    body.dark-mode .education-degree,
+    body.dark-mode .education-year,
+    body.dark-mode .education-details {
+      color: #bbb;
     }
     .experience-list {
       list-style: none;
@@ -238,12 +321,14 @@
       color: #333;
       margin-right: 0.5rem;
       font-size: 1rem;
+      transition: color 0.3s ease;
     }
     .company {
       font-weight: 400;
       color: #555;
       margin-right: 0.5rem;
       font-size: 1rem;
+      transition: color 0.3s ease;
     }
     .company::selection {
       background: #f0f0f0;
@@ -258,6 +343,20 @@
       font-size: 0.9rem;
       padding-left: 0.5rem;
       border-left: 2px solid #eee;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    body.dark-mode .description {
+      border-left: 2px solid #444;
+    }
+    .description a {
+      color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #eaeaea;
+      transition: all 0.3s ease;
+    }
+    .description a:hover {
+      color: #000;
+      border-bottom: 1px solid #999;
     }
     .description.small {
       font-size: 0.85rem;
@@ -279,6 +378,13 @@
     .skill-tag:hover {
       background: #eaeaea;
     }
+    body.dark-mode .skill-tag {
+      background: #2a2a2a;
+      color: #ddd;
+    }
+    body.dark-mode .skill-tag:hover {
+      background: #333;
+    }
     .education-item {
       margin-bottom: 1rem;
     }
@@ -287,6 +393,7 @@
       font-size: 1rem;
       color: #333;
       margin-bottom: 0.3rem;
+      transition: color 0.3s ease;
     }
     .education-details {
       font-size: 0.9rem;
@@ -301,6 +408,7 @@
       font-size: 1.05rem;
       color: #333;
       margin-bottom: 0.4rem;
+      transition: color 0.3s ease;
     }
     .project-item h3 a {
       color: #333;
@@ -311,6 +419,17 @@
     .project-item h3 a:hover {
       color: #000;
       border-bottom: 1px solid #999;
+    }
+    body.dark-mode .project-item h3 a {
+      color: #ddd;
+      border-bottom: 1px solid #444;
+    }
+    body.dark-mode .project-item h3 a:hover,
+    body.dark-mode .company a:hover,
+    body.dark-mode .blog-item h3 a:hover,
+    body.dark-mode .description a:hover {
+      color: #fff;
+      border-bottom: 1px solid #777;
     }
     .project-item p {
       margin-bottom: 0.5rem;
@@ -342,6 +461,12 @@
       color: #000;
       border-bottom: 1px solid #999;
     }
+    body.dark-mode .company a,
+    body.dark-mode .blog-item h3 a,
+    body.dark-mode .description a {
+      color: #bbb;
+      border-bottom: 1px solid #444;
+    }
     .award-item {
       margin-bottom: 1.5rem;
     }
@@ -350,6 +475,7 @@
       font-size: 1.05rem;
       color: #333;
       margin-bottom: 0.2rem;
+      transition: color 0.3s ease;
     }
     .award-meta {
       font-size: 0.8rem;
@@ -394,6 +520,11 @@
       border-radius: 3px;
       font-size: 0.8rem;
       color: #555;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.dark-mode .education-tag {
+      background: #2a2a2a;
+      color: #ccc;
     }
     @media (max-width: 768px) {
       .sidebar {
@@ -423,6 +554,15 @@
   </style>
 </head>
 <body>
+  <div class="theme-switch-wrapper">
+    <span class="theme-icon">☀️</span>
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox" />
+      <span class="slider"></span>
+    </label>
+    <span class="theme-icon">🌙</span>
+  </div>
+  
   <div class="container">
     <aside class="sidebar">
       <div class="header-title">
@@ -490,7 +630,7 @@
                 <span class="duration">Jun 2024 - Present</span>
               </div>
               <p class="description">Developing Multimodal AI (LiDAR + Camera) for static and dynamic object detection and tracking. Building Vision Foundation model-based networks for various autonomous tasks.</p>
-              <p class="description">Manager: <a href="https://scholar.google.com/citations?user=z0a8rsYAAAAJ&hl=en&oi=sra" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Senthil Yogamani</a>, <a href="https://scholar.google.com/citations?user=Tll071oAAAAJ&hl=en&oi=sra" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Dr. Varun Ravi Kumar</a></p>
+              <p class="description">Manager: <a href="https://scholar.google.com/citations?user=z0a8rsYAAAAJ&hl=en&oi=sra" target="_blank">Senthil Yogamani</a>, <a href="https://scholar.google.com/citations?user=Tll071oAAAAJ&hl=en&oi=sra" target="_blank">Dr. Varun Ravi Kumar</a></p>
               <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
             </div>
           </li>
@@ -502,7 +642,7 @@
                 <span class="duration">May 2024 - Sep 2024</span>
               </div>
               <p class="description">Mentoring project on converting unconstrained video to Gaussian Splats with OpenCV organization. Working with Gary Bradski, Founder & President of OpenCV foundation.</p>
-              <p class="description">Manager: <a href="https://en.wikipedia.org/wiki/Gary_Bradski" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Gary Bradski</a></p>
+              <p class="description">Manager: <a href="https://en.wikipedia.org/wiki/Gary_Bradski" target="_blank">Gary Bradski</a></p>
               <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
             </div>
           </li>
@@ -514,7 +654,7 @@
                 <span class="duration">Aug 2021 - Jun 2024</span>
               </div>
               <p class="description">Led the development of optimized visual odometry solutions for AR/VR/MR use cases. XR Research - Computer Vision team focusing on spatial computing technologies.</p>
-              <p class="description">Manager: <a href="https://scholar.google.com/citations?user=A93BbMAAAAAJ&hl=en&oi=ao" target="_blank" style="color: #333; text-decoration: none; border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;">Vasudev Bhaskaran</a></p>
+              <p class="description">Manager: <a href="https://scholar.google.com/citations?user=A93BbMAAAAAJ&hl=en&oi=ao" target="_blank">Vasudev Bhaskaran</a></p>
               <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
             </div>
           </li>
@@ -668,6 +808,10 @@
             margin: 15px 0 10px 0;
             color: #444;
             position: relative;
+            transition: color 0.3s ease;
+          }
+          body.dark-mode h3 {
+            color: #eee;
           }
           .github-icon {
             margin-left: 6px;
@@ -678,6 +822,14 @@
           }
           a:hover .github-icon {
             color: #000;
+          }
+          body.dark-mode .github-icon,
+          body.dark-mode .blog-icon {
+            color: #aaa;
+          }
+          body.dark-mode a:hover .github-icon,
+          body.dark-mode a:hover .blog-icon {
+            color: #fff;
           }
           .blog-icon {
             margin-left: 6px;
@@ -817,6 +969,34 @@
     document.addEventListener('DOMContentLoaded', function() {
       const sections = document.querySelectorAll('section');
       const navLinks = document.querySelectorAll('.nav-links a');
+      const toggleSwitch = document.querySelector('#checkbox');
+      
+      // Check for saved theme preference or prefer-color-scheme
+      const currentTheme = localStorage.getItem('theme');
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      
+      // If user has a saved preference, use that
+      if (currentTheme) {
+        document.body.classList.toggle('dark-mode', currentTheme === 'dark');
+        toggleSwitch.checked = currentTheme === 'dark';
+      } 
+      // Otherwise, respect the system preference
+      else if (prefersDarkScheme.matches) {
+        document.body.classList.add('dark-mode');
+        toggleSwitch.checked = true;
+        localStorage.setItem('theme', 'dark');
+      }
+      
+      // Theme switch event listener
+      toggleSwitch.addEventListener('change', function(e) {
+        if (e.target.checked) {
+          document.body.classList.add('dark-mode');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.body.classList.remove('dark-mode');
+          localStorage.setItem('theme', 'light');
+        }
+      });
       
       // Function to show only the active section
       function showActiveSection(sectionId) {
