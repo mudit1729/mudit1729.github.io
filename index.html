@@ -3,21 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mudit Jain - Technology specialist with expertise in 3D Machine Learning, SLAM, Computer Vision, GPU programming, and Embedded Systems">
-  <title>Mudit Jain</title>
+  <meta name="description" content="Mudit Jain — Senior Deep Learning Engineer (Multimodal AI). 3D/2D Machine Learning, SLAM, Computer Vision, GPU programming, and Embedded Systems for autonomous driving.">
+  <meta name="author" content="Mudit Jain">
+  <link rel="canonical" href="https://mudit1729.github.io/">
+  <title>Mudit Jain — Senior Deep Learning Engineer, Multimodal AI</title>
+
+  <!-- Open Graph (LinkedIn, Facebook, Slack) -->
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Mudit Jain">
+  <meta property="og:title" content="Mudit Jain — Senior Deep Learning Engineer, Multimodal AI">
+  <meta property="og:description" content="3D/2D Machine Learning, SLAM, Computer Vision, GPU programming, and Embedded Systems for autonomous driving.">
+  <meta property="og:url" content="https://mudit1729.github.io/">
+  <meta property="og:image" content="https://mudit1729.github.io/og-image.jpg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="800">
+  <meta property="og:image:alt" content="Mudit Jain">
+  <meta property="profile:first_name" content="Mudit">
+  <meta property="profile:last_name" content="Jain">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@Mudit1729">
+  <meta name="twitter:creator" content="@Mudit1729">
+  <meta name="twitter:title" content="Mudit Jain — Senior Deep Learning Engineer, Multimodal AI">
+  <meta name="twitter:description" content="3D/2D Machine Learning, SLAM, Computer Vision, GPU programming, and Embedded Systems for autonomous driving.">
+  <meta name="twitter:image" content="https://mudit1729.github.io/og-image.jpg">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mudit Jain",
+    "url": "https://mudit1729.github.io/",
+    "image": "https://mudit1729.github.io/og-image.jpg",
+    "jobTitle": "Senior Deep Learning Engineer, Multimodal AI",
+    "worksFor": { "@type": "Organization", "name": "Qualcomm" },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "University of California San Diego" },
+      { "@type": "CollegeOrUniversity", "name": "Birla Institute of Technology and Science, Pilani" }
+    ],
+    "knowsAbout": ["Multimodal AI", "Computer Vision", "SLAM", "Autonomous Driving", "Deep Learning", "GPU Programming", "3D Reconstruction"],
+    "sameAs": [
+      "https://www.linkedin.com/in/muditj1729/",
+      "https://x.com/Mudit1729",
+      "https://scholar.google.com/citations?hl=en&user=PRbyQEAAAAAJ",
+      "https://github.com/mudit1729"
+    ]
+  }
+  </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" as="style">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css" media="print" onload="this.media='all'">
+  <!-- Icons are inlined as SVG (see sprite in <body>); no external icon font needed. -->
   <noscript>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
   </noscript>
   <style>
     /* Critical CSS for above-the-fold content */
@@ -55,6 +97,9 @@
     input:checked + .slider:before {transform:translateX(26px);}
     .theme-icon {margin:0 6px;font-size:14px;color:#555;}
     body.dark-mode .theme-icon {color:#aaa;}
+    .ic {width:1em;height:1em;fill:currentColor;display:inline-block;vertical-align:-0.125em;flex:none;}
+    .skip-link {position:absolute;left:-9999px;top:auto;background:#6a5acd;color:#fff;padding:0.6rem 1rem;border-radius:4px;z-index:2000;text-decoration:none;}
+    .skip-link:focus {left:1rem;top:1rem;}
   </style>
   <style>
     /* Basic Reset */
@@ -447,7 +492,7 @@
       font-style: italic;
       margin-top: 0.4rem;
     }
-    .location i {
+    .location .ic {
       margin-right: 0.3rem;
       color: #999;
     }
@@ -554,10 +599,25 @@
   </style>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Inline icon sprite (replaces Font Awesome) -->
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+    <symbol id="i-linkedin" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></symbol>
+    <symbol id="i-x-twitter" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></symbol>
+    <symbol id="i-graduation-cap" viewBox="0 0 640 512"><path d="M320 32c-8.1 0-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6l57.9 20.9C57.3 229.3 48 259.8 48 291.9l0 28.1c0 28.4-10.8 57.7-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7C90.3 344.3 86 329.8 80 316.5l0-24.6c0-30.2 10.2-58.7 27.9-81.5c12.9-15.5 29.6-28 49.2-35.7l157-61.7c8.2-3.2 17.5 .8 20.7 9s-.8 17.5-9 20.7l-157 61.7c-12.4 4.9-23.3 12.4-32.2 21.6l159.6 57.6c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32zM128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6 354.5 314c-11.1 4-22.8 6-34.5 6s-23.5-2-34.5-6L143.3 262.6 128 408z"/></symbol>
+    <symbol id="i-envelope" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></symbol>
+    <symbol id="i-file-arrow-down" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM216 232l0 102.1 31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31L168 232c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></symbol>
+    <symbol id="i-location-dot" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></symbol>
+    <symbol id="i-external" viewBox="0 0 512 512"><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/></symbol>
+    <symbol id="i-bars" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></symbol>
+  </svg>
+
   <div class="theme-switch-wrapper">
     <span class="theme-icon">☀️</span>
     <label class="theme-switch" for="checkbox">
-      <input type="checkbox" id="checkbox" />
+      <input type="checkbox" id="checkbox" aria-label="Toggle dark mode" />
       <span class="slider"></span>
     </label>
     <span class="theme-icon">🌙</span>
@@ -568,16 +628,19 @@
       <div class="header-title">
         <h1>Mudit Jain</h1>
         <div class="social-icons">
-          <a href="https://www.linkedin.com/in/muditj1729/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="https://x.com/Mudit1729" target="_blank" title="X (Twitter)"><i class="fab fa-twitter"></i></a>
-          <a href="https://scholar.google.com/citations?hl=en&user=PRbyQEAAAAAJ" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
-          <a href="mailto:muditj1801@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-          <a href="Resume.pdf" download title="Download CV"><i class="fas fa-file-download"></i></a>
+          <a href="https://www.linkedin.com/in/muditj1729/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><svg class="ic" aria-hidden="true"><use href="#i-linkedin"></use></svg></a>
+          <a href="https://x.com/Mudit1729" target="_blank" rel="noopener" title="X (Twitter)" aria-label="X (Twitter)"><svg class="ic" aria-hidden="true"><use href="#i-x-twitter"></use></svg></a>
+          <a href="https://scholar.google.com/citations?hl=en&user=PRbyQEAAAAAJ" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar"><svg class="ic" aria-hidden="true"><use href="#i-graduation-cap"></use></svg></a>
+          <a href="mailto:muditj1801@gmail.com" title="Email" aria-label="Email"><svg class="ic" aria-hidden="true"><use href="#i-envelope"></use></svg></a>
+          <a href="Resume.pdf" download title="Download CV" aria-label="Download CV"><svg class="ic" aria-hidden="true"><use href="#i-file-arrow-down"></use></svg></a>
         </div>
       </div>
       
       <div class="profile-section">
-        <img src="profile.jpeg" alt="Profile Picture" class="profile-img" width="120" height="120" loading="lazy" fetchpriority="high">
+        <picture>
+          <source srcset="profile.webp" type="image/webp">
+          <img src="profile.jpeg" alt="Mudit Jain" class="profile-img" width="120" height="120" loading="eager" fetchpriority="high">
+        </picture>
       </div>
       
       <div class="nav-container">
@@ -593,7 +656,7 @@
     </aside>
     
     
-    <div class="main-content">
+    <div class="main-content" id="main">
       <section id="about-news" class="about-news section-content">
         <h2>👨‍💻 About Me</h2>
         <p>Hi, I'm Mudit Jain, an engineer at heart with expertise in 3D/2D Machine Learning, SLAM, Computer Vision, GPU programming, and Embedded Systems.</p>
@@ -639,7 +702,7 @@
               </div>
               <p class="description">Building and scaling multimodal perception, auto-labeling, planning, and Vision-Language-Action architectures for autonomous driving. Mentoring innovation fund projects in end-to-end autonomy and fisheye-BEV perception.</p>
               <p class="description">Manager: <a href="https://scholar.google.com/citations?user=z0a8rsYAAAAJ&hl=en&oi=sra" target="_blank">Senthil Yogamani</a>, <a href="https://scholar.google.com/citations?user=Tll071oAAAAJ&hl=en&oi=sra" target="_blank">Dr. Varun Ravi Kumar</a>, Pranav Desai</p>
-              <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
+              <p class="location"><svg class="ic" aria-hidden="true"><use href="#i-location-dot"></use></svg> San Diego, California</p>
             </div>
           </li>
           <li>
@@ -651,7 +714,7 @@
               </div>
               <p class="description">Mentoring project on converting unconstrained video to Gaussian Splats with OpenCV organization. Working with Gary Bradski, Founder & President of OpenCV foundation.</p>
               <p class="description">Manager: <a href="https://en.wikipedia.org/wiki/Gary_Bradski" target="_blank">Gary Bradski</a></p>
-              <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
+              <p class="location"><svg class="ic" aria-hidden="true"><use href="#i-location-dot"></use></svg> San Diego, California</p>
             </div>
           </li>
           <li>
@@ -663,7 +726,7 @@
               </div>
               <p class="description">Led the development of optimized visual odometry solutions for AR/VR/MR use cases. XR Research - Computer Vision team focusing on spatial computing technologies.</p>
               <p class="description">Manager: <a href="https://scholar.google.com/citations?user=A93BbMAAAAAJ&hl=en&oi=ao" target="_blank">Vasudev Bhaskaran</a></p>
-              <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
+              <p class="location"><svg class="ic" aria-hidden="true"><use href="#i-location-dot"></use></svg> San Diego, California</p>
             </div>
           </li>
           <li>
@@ -675,7 +738,7 @@
               </div>
               <p class="description">Designed and deployed an Attention-based CNN on 600 cameras for wildfire detection (ALERTWildFire initiative). Developed 4K video processing pipeline on NVIDIA AGX Xavier using DeepStream SDK and TensorRT.</p>
               <p class="description">Manager: Dr. Falko Kuester</p>
-              <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
+              <p class="location"><svg class="ic" aria-hidden="true"><use href="#i-location-dot"></use></svg> San Diego, California</p>
             </div>
           </li>
           <li>
@@ -686,7 +749,7 @@
                 <span class="duration">Jan 2020 - Mar 2020</span>
               </div>
               <p class="description">Taught Art of Product Engineering (ECE 140A) covering end-to-end software development and hardware integration.</p>
-              <p class="location"><i class="fas fa-map-marker-alt"></i> San Diego, California</p>
+              <p class="location"><svg class="ic" aria-hidden="true"><use href="#i-location-dot"></use></svg> San Diego, California</p>
             </div>
           </li>
           <li>
@@ -697,7 +760,7 @@
                 <span class="duration">Oct 2017 - Jul 2019</span>
               </div>
               <p class="description">Designed I2C Virtualization per ISO26262 functional safety standards for ARM-based SoCs (Xavier/Parker). Optimized bootloader and implemented OS-agnostic GPCDMA library for automotive applications.</p>
-              <p class="location"><i class="fas fa-map-marker-alt"></i> Bengaluru, India</p>
+              <p class="location"><svg class="ic" aria-hidden="true"><use href="#i-location-dot"></use></svg> Bengaluru, India</p>
             </div>
           </li>
           <li>
@@ -707,7 +770,7 @@
                 <span class="company"><a href="https://www.nvidia.com" target="_blank" >NVIDIA</a></span>
                 <span class="duration">Jul 2016 - Oct 2017</span>
               </div>
-              <p class="location"><i class="fas fa-map-marker-alt"></i> Bengaluru, India</p>
+              <p class="location"><svg class="ic" aria-hidden="true"><use href="#i-location-dot"></use></svg> Bengaluru, India</p>
             </div>
           </li>
           <li>
@@ -718,7 +781,7 @@
                 <span class="duration">Apr 2016 - Jul 2016</span>
               </div>
               <p class="description">Ported FreeBSD SDMMC driver for RTEMS and added DMA library for Raspberry Pi BSP.</p>
-              <p class="location"><i class="fas fa-map-marker-alt"></i> Bengaluru, India · Remote</p>
+              <p class="location"><svg class="ic" aria-hidden="true"><use href="#i-location-dot"></use></svg> Bengaluru, India · Remote</p>
             </div>
           </li>
           <li>
@@ -729,7 +792,7 @@
                 <span class="duration">Jul 2015 - Dec 2015</span>
               </div>
               <p class="description">Developed production tools for automotive customers to create OS firmware and boot targets.</p>
-              <p class="location"><i class="fas fa-map-marker-alt"></i> Bengaluru, India</p>
+              <p class="location"><svg class="ic" aria-hidden="true"><use href="#i-location-dot"></use></svg> Bengaluru, India</p>
             </div>
           </li>
           <li>
@@ -740,7 +803,7 @@
                 <span class="duration">Dec 2014 - Apr 2015</span>
               </div>
               <p class="description">Developed a low-cost wearable VR headset and Pupil+ platform for eye diagnosis (MIT Media Labs collaboration).</p>
-              <p class="location"><i class="fas fa-map-marker-alt"></i> Hyderabad, India</p>
+              <p class="location"><svg class="ic" aria-hidden="true"><use href="#i-location-dot"></use></svg> Hyderabad, India</p>
             </div>
           </li>
         </ul>
@@ -767,7 +830,6 @@
                 <span class="company"><a href="https://www.bits-pilani.ac.in" target="_blank">Birla Institute of Technology and Science, Pilani</a></span>
                 <span class="duration">2012-2016</span>
               </div>
-              <p class="description">Minor in Data Science with focus on Embedded Systems and Computer Vision</p>
             </div>
           </li>
         </ul>
@@ -876,7 +938,7 @@
 
         <div class="project-item">
           <h3>
-            <a href="https://arxiv.org/abs/2607.09138" target="_blank">BeyondSight: Object Permanence for End-to-End Autonomous Driving <i class="fas fa-external-link-alt github-icon"></i></a>
+            <a href="https://arxiv.org/abs/2607.09138" target="_blank">BeyondSight: Object Permanence for End-to-End Autonomous Driving <svg class="ic github-icon" aria-hidden="true"><use href="#i-external"></use></svg></a>
           </h3>
           <p>Sandro Papais, Letian Wang, <strong>Mudit Jain</strong>, Behnaz Rezaei, Steven L. Waslander</p>
           <p>Maintains persistent representations of vehicles and obstacles even while occluded, introducing the nuScenes-Permanence dataset and improving detection of hidden actors and downstream planning.</p>
@@ -885,7 +947,7 @@
 
         <div class="project-item">
           <h3>
-            <a href="https://arxiv.org/abs/2604.10391" target="_blank">FishRoPE: Projective Rotary Position Embeddings for Omnidirectional Visual Perception <i class="fas fa-external-link-alt github-icon"></i></a>
+            <a href="https://arxiv.org/abs/2604.10391" target="_blank">FishRoPE: Projective Rotary Position Embeddings for Omnidirectional Visual Perception <svg class="ic github-icon" aria-hidden="true"><use href="#i-external"></use></svg></a>
           </h3>
           <p>R. Ahuja, <strong>Mudit Jain</strong>, B. M. M. S. Sudhakar, V. Narayanan, P. Likhar, V. R. Kumar, et al.</p>
           <p>Adapts frozen vision foundation models to fisheye geometry via spherical-coordinate rotary position embeddings and LoRA, reaching state-of-the-art WoodScape 2D detection and SynWoodScapes BEV segmentation.</p>
@@ -898,63 +960,63 @@
         
         <div class="project-item">
           <h3>
-            <a href="https://auto-driving-wiki.up.railway.app/" target="_blank">Autonomous Driving Wiki <i class="fas fa-external-link-alt github-icon"></i></a>
+            <a href="https://auto-driving-wiki.up.railway.app/" target="_blank">Autonomous Driving Wiki <svg class="ic github-icon" aria-hidden="true"><use href="#i-external"></use></svg></a>
           </h3>
           <p>A curated knowledge base for autonomous driving research, covering perception, planning, end-to-end models, and multimodal architectures with structured summaries and cross-references across papers and methods.</p>
         </div>
 
         <div class="project-item">
           <h3>
-            <a href="https://github.com/mudit1729/navigation_rl" target="_blank">Minefield Navigator RL <i class="fab fa-github github-icon"></i></a>
+            <a href="https://github.com/mudit1729/navigation_rl" target="_blank">Minefield Navigator RL <svg class="ic github-icon" aria-hidden="true"><use href="#i-github"></use></svg></a>
           </h3>
           <p>Procedural partially-observable navigation where a recurrent agent sees only a 9×9 fog-of-war window and must reason around walls and mines. Trained with a staged pipeline (imitation → recurrent PPO → MCTS-guided GRPO) over a multi-stage curriculum, reaching 90% success on dense 20×20 maps under instant-death conditions.</p>
         </div>
 
         <div class="project-item">
           <h3>
-            <a href="https://github.com/mudit1729/algorithm-visualizer" target="_blank">Algorithm Visualizer <i class="fab fa-github github-icon"></i></a>
+            <a href="https://github.com/mudit1729/algorithm-visualizer" target="_blank">Algorithm Visualizer <svg class="ic github-icon" aria-hidden="true"><use href="#i-github"></use></svg></a>
           </h3>
           <p>Interactive step-through visualizer for 42 algorithm problems covering graphs, grids, union-find, tries, and more. Features 6 renderer types, weighted graph support, and auxiliary panels for queue/stack visualization.</p>
         </div>
 
         <div class="project-item">
           <h3>
-            <a href="https://github.com/mudit1729/snake-rl" target="_blank">Snake RL from Pixels <i class="fab fa-github github-icon"></i></a>
+            <a href="https://github.com/mudit1729/snake-rl" target="_blank">Snake RL from Pixels <svg class="ic github-icon" aria-hidden="true"><use href="#i-github"></use></svg></a>
           </h3>
           <p>Trains Snake agents directly from rendered board images, comparing plain DQN, DQN with configurable MCTS rollouts, and GRPO. Includes TensorBoard logging and video generation hooks.</p>
         </div>
 
         <div class="project-item">
           <h3>
-            <a href="https://github.com/mudit1729/deduplication_embedding" target="_blank">Deduplication Embedding <i class="fab fa-github github-icon"></i></a>
+            <a href="https://github.com/mudit1729/deduplication_embedding" target="_blank">Deduplication Embedding <svg class="ic github-icon" aria-hidden="true"><use href="#i-github"></use></svg></a>
           </h3>
           <p>Local near-duplicate question detection on the Quora Question Pairs dataset using sentence-transformers and HNSW-based approximate nearest neighbor search, with a retrieval-first pattern for semantic similarity and hard example mining.</p>
         </div>
 
         <div class="project-item">
           <h3>
-            <a href="https://github.com/mudit1729/tictactoe-RL" target="_blank">Tic-Tac-Toe RL <i class="fab fa-github github-icon"></i></a>
+            <a href="https://github.com/mudit1729/tictactoe-RL" target="_blank">Tic-Tac-Toe RL <svg class="ic github-icon" aria-hidden="true"><use href="#i-github"></use></svg></a>
           </h3>
           <p>Neural agents for Tic-Tac-Toe using plain DQN and DQN with MCTS-guided action selection, trained against a mixed minimax/random opponent. Includes a live browser demo with exported model weights.</p>
         </div>
 
         <div class="project-item">
           <h3>
-            <a href="https://github.com/mudit1729/dinov2-od" target="_blank">DINOv2 Object Detection <i class="fab fa-github github-icon"></i></a>
+            <a href="https://github.com/mudit1729/dinov2-od" target="_blank">DINOv2 Object Detection <svg class="ic github-icon" aria-hidden="true"><use href="#i-github"></use></svg></a>
           </h3>
           <p>Implementation of object detection using DINOv2 self-supervised vision transformers, enabling state-of-the-art zero-shot detection capabilities.</p>
         </div>
         
         <div class="project-item">
           <h3>
-            <a href="https://github.com/mudit1729/ba_in_the_large" target="_blank">Bundle Adjustment in the Large <i class="fab fa-github github-icon"></i></a>
+            <a href="https://github.com/mudit1729/ba_in_the_large" target="_blank">Bundle Adjustment in the Large <svg class="ic github-icon" aria-hidden="true"><use href="#i-github"></use></svg></a>
           </h3>
           <p>Optimization methods for large-scale bundle adjustment in 3D reconstruction challenges, focusing on efficiency and scalability.</p>
         </div>
         
         <div class="project-item">
           <h3>
-            <a href="https://github.com/mudit1729/depth_estimation" target="_blank">Depth Estimation <i class="fab fa-github github-icon"></i></a>
+            <a href="https://github.com/mudit1729/depth_estimation" target="_blank">Depth Estimation <svg class="ic github-icon" aria-hidden="true"><use href="#i-github"></use></svg></a>
           </h3>
           <p>Monocular depth estimation techniques for 3D scene understanding from 2D images using deep learning approaches.</p>
         </div>
@@ -1027,8 +1089,8 @@
     </div>
   </div>
 
-  <div class="menu-toggle" id="menuToggle">
-    <i class="fas fa-bars"></i>
+  <div class="menu-toggle" id="menuToggle" role="button" tabindex="0" aria-label="Open menu">
+    <svg class="ic" aria-hidden="true"><use href="#i-bars"></use></svg>
   </div>
 
   <script defer>
@@ -1087,14 +1149,26 @@
         });
       }
       
-      // Show the work history section by default when page loads
-      showActiveSection('#work');
+      // Deep-linking: open the section named in the URL hash, else default to Work History
+      function sectionFromHash() {
+        const id = window.location.hash;
+        const valid = /^#[A-Za-z][\w-]*$/.test(id) && document.querySelector(id + '.section-content');
+        return valid ? id : '#work';
+      }
+      showActiveSection(sectionFromHash());
+
+      // Keep sections in sync with back/forward navigation and manual hash edits
+      window.addEventListener('popstate', function() { showActiveSection(sectionFromHash()); });
+      window.addEventListener('hashchange', function() { showActiveSection(sectionFromHash()); });
       
       // Smooth scrolling and section switching for nav links
       navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
           const targetId = this.getAttribute('href');
+          if (window.history && history.pushState) {
+            history.pushState(null, '', targetId);
+          }
           showActiveSection(targetId);
           
           // Close menu on mobile after clicking
